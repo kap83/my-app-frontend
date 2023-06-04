@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default function Table() {
+export default function Table(show) {
+
+  // console.log("in table", show)
  
     const data = [
 
@@ -20,9 +22,10 @@ export default function Table() {
             <th>Ongoing?</th>
         </tr>
 
+        <tbody>
         {data.map((val, key) => {
             return (
-                <tr key={key}>
+                   <tr key={val.id}>
                     <td>{val.genre}</td>
                     <td>{val.title}</td>
                     <td>{val.seasons}</td>
@@ -30,10 +33,10 @@ export default function Table() {
                     <td>{val.language}</td>
                     <td>{val.ongoing}</td>
                     <td></td>
-                </tr>
+                  </tr>
             )
         })}
-        
+        </tbody>
       </table>
     </div>
   )

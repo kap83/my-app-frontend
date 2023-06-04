@@ -8,17 +8,27 @@ import NavBar from './NavBar';
 import Form from './Form'
 
 
-function App() {
 
-  // eslint-disable-next-line
-  // const [datas, setDatas] = useState()
+function App() {
+  //eslint-disable-next-line
+  const [shows, setShows] = useState([])  
+
+
+  useEffect(()=> {
+    fetch("http://localhost:9292/shows")
+    .then(res => res.json())
+    .then(responseData => {
+      const showsData = responseData.map(show => show)
+      setShows(showsData)
+    })
+  }, [])
 
   return (
     <div className="app">
     <h1>TV Show Catalogue</h1>
     <NavBar  />
     <Routes>
-      <Route path='/' element={<TVShows />} />
+      <Route path='/' element={<TVShows shows={shows}/>} />
       <Route path='/form' element={<Form />} />
     </Routes>
 
