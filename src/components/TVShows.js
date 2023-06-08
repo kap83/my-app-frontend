@@ -4,7 +4,14 @@ import AddShow from './AddShow'
 
 export default function TVShows({shows}) {
 
-  console.log(shows)
+  // this is how you do it [{}]
+// const [{title, seasons}] = shows
+// console.log(title, seasons)
+
+//these works too
+//let test = shows.map((show) => console.log("test", show))
+//{shows.map({title, genre: {category}, id, seasons, number_of_episodes, original_language, ongoing} => etc)}
+
 
     return (
       <>
@@ -23,16 +30,15 @@ export default function TVShows({shows}) {
         </thead>
         <tbody>
           {
-            shows.map(({title, genre, id, seasons, number_of_episodes, original_language, ongoing}) => {
-              // console.log(ongoing)
+            shows.map((show) => {
               return (
-                <tr key={id}>
-                  <td>{title}</td>
-                  <td>{genre.category}</td>
-                  <td>{seasons}</td>
-                  <td>{number_of_episodes}</td>
-                  <td>{original_language}</td>
-                  <td>{ongoing}</td>
+                <tr key={show.id}>
+                  <td>{show.title}</td>
+                  <td>{show.genre.category}</td>
+                  <td>{show.seasons}</td>
+                  <td>{show.number_of_episodes}</td>
+                  <td>{show.original_language}</td>
+                  <td>{show.ongoing}</td>
                 </tr>
               )})
           }
