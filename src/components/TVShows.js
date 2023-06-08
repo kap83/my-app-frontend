@@ -1,10 +1,10 @@
 import React from 'react'
 // eslint-disable-next-line
-import AddShow from './AddShow'
+import AddNewShow from './AddNewShow'
 
-export default function TVShows({shows}) {
+export default function TVShows({shows, handleAddedShow}) {
 
-  // this is how you do it [{}]
+// this is how you do it [{}]
 // const [{title, seasons}] = shows
 // console.log(title, seasons)
 
@@ -15,7 +15,7 @@ export default function TVShows({shows}) {
 
     return (
       <>
-      {/* <AddShow /> */}
+      <AddNewShow handleAddedShow={handleAddedShow} />
        <div className='table-container'>
       <table>
         <thead>
@@ -38,7 +38,7 @@ export default function TVShows({shows}) {
                   <td>{show.seasons}</td>
                   <td>{show.number_of_episodes}</td>
                   <td>{show.original_language}</td>
-                  <td>{show.ongoing}</td>
+                  {/* FORGET ABOUT THIS FOR NOW: <td>{show.ongoing}</td> */}
                 </tr>
               )})
           }

@@ -14,13 +14,15 @@ function App() {
     )
   }, [])
 
-
+  const handleAddedShow = (newShow) => {
+    setShows([...shows, newShow])
+  }
 
 
 return (
     <div className="app">
     <h1>TV Show Catalogue</h1>
-      {shows && <TVShows shows={shows} />}
+      {shows && <TVShows shows={shows} handleAddedShow={handleAddedShow} />}
     </div>
   );
 }
