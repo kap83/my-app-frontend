@@ -43,7 +43,7 @@ export default function TVShows({shows, handleAddedShow, handleDelete}) {
                   <td>{show.number_of_episodes}</td>
                   <td>{show.original_language}</td>
                   {/* FORGET ABOUT THIS FOR NOW: <td>{show.ongoing}</td> */}
-                  <td><DeleteBtn show={show}/></td>
+                  <td><DeleteBtn show={show} handleDelete={handleDelete}/></td>
                 </tr>
               )})
           }
