@@ -4,7 +4,7 @@ import '../index.css'
 export default function deleteBtn({handleDelete, show}) {
 
     function handleDeleteClick() {
-        fetch("http://localhost:9292/shows/${shows.id}", {
+        fetch(`http://localhost:9292/shows/${show.id}`, {
           method: "DELETE", 
         })
         .then((res) => res.json())
