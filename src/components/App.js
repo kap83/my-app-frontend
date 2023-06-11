@@ -18,11 +18,17 @@ function App() {
     setShows([...shows, newShow])
   }
 
+  const handleDelete = (deletedShow) => {
+    const findDeletedShowById = shows.find(show => show.id === deletedShow.id)
+    const copyOfShows = [...shows]
+    copyOfShows[findDeletedShowById] = deletedShow
+    setShows(copyOfShows)
+  }
 
 return (
     <div className="app">
     <h1>TV Show Catalogue</h1>
-      {shows && <TVShows shows={shows} handleAddedShow={handleAddedShow} />}
+      {shows && <TVShows shows={shows} handleAddedShow={handleAddedShow} handleDelete={handleDelete} />}
     </div>
   );
 }

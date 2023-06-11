@@ -1,8 +1,10 @@
 import React from 'react'
-// eslint-disable-next-line
 import AddNewShow from './AddNewShow'
+import DeleteBtn from './DeleteBtn'
 
-export default function TVShows({shows, handleAddedShow}) {
+// eslint-disable-next-line
+export default function TVShows({shows, handleAddedShow, handleDelete}) {
+
 
 // this is how you do it [{}]
 // const [{title, seasons}] = shows
@@ -11,6 +13,7 @@ export default function TVShows({shows, handleAddedShow}) {
 //these works too
 //let test = shows.map((show) => console.log("test", show))
 //{shows.map({title, genre: {category}, id, seasons, number_of_episodes, original_language, ongoing} => etc)}
+
 
 
     return (
@@ -25,12 +28,13 @@ export default function TVShows({shows, handleAddedShow}) {
             <th>Seasons</th>
             <th>No of Eps</th>
             <th>Original Language</th>
-            <th>Ongoing?</th>
+            {/* <th>Ongoing?</th> */}
           </tr>
         </thead>
         <tbody>
           {
             shows.map((show) => {
+             
               return (
                 <tr key={show.id}>
                   <td>{show.title}</td>
@@ -39,6 +43,7 @@ export default function TVShows({shows, handleAddedShow}) {
                   <td>{show.number_of_episodes}</td>
                   <td>{show.original_language}</td>
                   {/* FORGET ABOUT THIS FOR NOW: <td>{show.ongoing}</td> */}
+                  <td><DeleteBtn show={show}/></td>
                 </tr>
               )})
           }
