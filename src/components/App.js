@@ -3,7 +3,7 @@ import '../index.css'
 import TVShows from './TVShows';
 
 function App() {
-  //eslint-disable-next-line
+  
   const [shows, setShows] = useState([])  
 
 
@@ -25,9 +25,11 @@ function App() {
     setShows(copyOfShows)
   }
 
+
+
 return (
-    <div className="app">
-    <h1>TV Show Catalogue</h1>
+    <div className="app-container">
+    {/* <h1>TV Show Catalogue</h1> */}
       {shows && <TVShows shows={shows} handleAddedShow={handleAddedShow} handleDelete={handleDelete} />}
     </div>
   );

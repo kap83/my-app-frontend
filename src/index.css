@@ -5,11 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(
+  /* background: linear-gradient(
     90deg,
     rgba(48, 16, 255, 1) 0%,
     rgba(100, 115, 255, 1) 100%
-  );
+  ); */
 }
 
 code {
@@ -17,50 +17,91 @@ code {
     monospace;
 }
 
-* {
-  /* box-sizing: border-box; */
+/* * {
+  box-sizing: border-box;
   margin:  0;
   padding: 0;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
+} */
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
 }
 
+table {
+  border-collapse: collapse;
+  /* width: 100%; */
+}
 
+th,
+td {
+  border: 1px solid #ffffff;
+  text-align: left;
+  padding: 8px;
+  font-size: 32px;
+  
+}
 
+th {
+  background-color: rgb(117, 201, 250);
+}
 
-.app {
+td {
+  background-color: rgb(205, 235, 253);
+}
+
+form {
+  display: flex;
+  gap: 5px;
+}
+
+form td:last-child {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+form * {
+  font-size: 28px;
+}
+
+/* .app { */
   /* display: flex; */
   /* flex-direction: column; */
-  width: 1200px;
-  padding: 200px;
-  min-height: 600px;
+  /* width: 1200px;
+  padding: 200px; */
+  /* min-height: 600px; */
   /* background: #161a2b; */
-  text-align: center;
+  /* text-align: center;
   color: white;
-  margin: 128px auto; 
+  margin: 128px auto;  */
   /* border-radius: 10px;  */
-  /* padding-bottom: 32px; */ }
+  /* padding-bottom: 32px; */ 
+/* } */
 
-  h1 {
+  /* h1 {
     color: white;
     padding-right: 50px;
     padding-top: 50px;
     margin-top: -50px;
     margin-bottom: 10px;
-  }
+  } */
 
-.formStyle{
+/* .formStyle{
   margin-bottom: 20px;
-}
+} */
 
-.table-container {
+/* .table-container {
   border-left: 2px solid white;
   width: 800px;
   height: 200px;
   font-size: medium;
-}
+} */
 
-th {
+/* th {
   border-bottom: 1px ;
   padding-left: 40px;
   padding-right: 40px;
@@ -70,7 +111,7 @@ td {
   padding-left: 40px;
   padding-right: 40px;
   text-align: justify;
-}
+} */
 
 /* form {
 } */

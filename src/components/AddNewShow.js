@@ -8,7 +8,7 @@ export default function AddNewShow({handleAddedShow}) {
   const [totalEpisodes, setTotalEpisodes] = useState("")
   const [totalSeasons, setTotalSeasons] = useState("")
   const [language, setLanguage] = useState("")
-  const [ongoing, setOngoing] = useState("")
+  // const [ongoing, setOngoing] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -18,9 +18,8 @@ export default function AddNewShow({handleAddedShow}) {
       seasons: totalSeasons,
       number_of_episodes: totalEpisodes,
       original_language: language,
-      ongoing: ongoing
+      // ongoing: ongoing
     }
-
 
     fetch("http://localhost:9292/shows", {
       method: "POST",
@@ -79,14 +78,14 @@ export default function AddNewShow({handleAddedShow}) {
       placeholder='Enter the original Language'
       onChange={(e)=> setLanguage(e.target.value)}
       />
-      <input 
+      {/* <input 
         type='text' 
         value={ongoing}
         name='Ongoing?' 
         required='required' 
         placeholder='Is it ongoing?'
         onChange={(e)=> setOngoing(e.target.value)}
-        />
+        /> */}
       <button type='submit'>Add</button>
     </form>
   )
