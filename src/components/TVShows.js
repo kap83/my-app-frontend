@@ -11,9 +11,14 @@ export default function TVShows() {
   
   const [shows, setShows] = useState([])
     //this will be for the patch 
-  // const [editedFormData, setEditedFormData] = useState([])  
+  const [editedFormData, setEditedFormData] = useState({
+    title: "",
+    genre: "",
+    seasons: "",
+    eps: "",
+    language: ""
+  })  
     //works with handleEditClick -- to switch between editableshow and readonlyshow
-    // eslint-disable-next-line
   const [editedShowId, setEditedShowID] = useState(null)
 
 
@@ -28,8 +33,26 @@ export default function TVShows() {
     e.preventDefault()
     // console.log(clickedShow)
     setEditedShowID(show.id)
+
+    const formValues = {
+      title: show.title,
+      genre: show.genre.category,
+      seasons: show.seasons,
+      eps: show.number_of_episodes,
+      language: show.original_language
+    }
+    setEditedFormData(formValues)
   }
 
+  const handleEditFormChange = (e) => {
+    e.preventDefault()
+    const fieldName = e.target.getAttribute("name")
+    const fieldValue = e.target.value
+    //const newFormData = {...editedFormData} <--what he did at 33:03
+    const newFormData = [...editedFormData]
+    newFormData[fieldName] = fieldValue
+    setEditedFormData(newFormData) 
+  }
 
   const handleDeletedShow = (deletedShow) => {
     const findDeletedShowById = shows.find(show => show.id === deletedShow.id )
@@ -61,7 +84,7 @@ export default function TVShows() {
                 <Fragment key={show.id}>
                   {
                     editedShowId === show.id ? 
-                    <EditableShowRow /> 
+                    <EditableShowRow editedFormData={editedFormData} handleEditFormChange={handleEditFormChange} /> 
                     : <ReadOnlyShowRow show={show} handleEditClick={handleEditClick} handleDeletedShow={handleDeletedShow}/> 
                   }
                 </Fragment>
