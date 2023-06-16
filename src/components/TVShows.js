@@ -10,9 +10,7 @@ import ReadOnlyShowRow from './ReadOnlyShowRow'
 export default function TVShows() {
   
   const [shows, setShows] = useState([])
-    //works with handleEditClick -- to switch between editableshow and readonlyshow
   const [editedShowId, setEditedShowId] = useState(null)
-    //this will be for the patch 
   const [editedFormData, setEditedFormData] = useState({
     title: "",
     genre: {
@@ -28,7 +26,7 @@ export default function TVShows() {
   useEffect(()=> {
     fetch("http://localhost:3000/shows")
     .then(res => res.json())
-    .then( showData => setShows(showData)
+    .then(showData => setShows(showData)
     )
   }, [])
 

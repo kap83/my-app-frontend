@@ -3,53 +3,34 @@
     {
       "id": 1,
       "title": "The Original Series",
-      "genre_id": 6,
+      "genre": "Science Fiction",
       "seasons": 3,
       "number_of_episodes": 79,
-      "original_language": "English",
-      "ongoing": false,
-      "genre": "Science Fiction",
-      "episodes": 79,
-      "language": "English"
+      "original_language": "English"
     },
     {
       "id": 2,
       "title": "Stargate SG-1",
-      "genre_id": 6,
+      "genre": "Science Fiction",
       "seasons": 10,
       "number_of_episodes": 214,
-      "original_language": "English",
-      "ongoing": false,
-      "genre": {
-        "id": 6,
-        "category": "Science Fiction"
-      }
+      "original_language": "English"
     },
     {
       "id": 3,
-      "title": "BattleStar Galactical",
-      "genre_id": 6,
+      "title": "BattleStar Galactica",
+      "genre": "Science Fiction",
       "seasons": 13,
       "number_of_episodes": 13,
-      "original_language": "English",
-      "ongoing": false,
-      "genre": {
-        "id": 6,
-        "category": "Science Fiction"
-      }
+      "original_language": "English"
     },
     {
       "id": 4,
       "title": "The Great British Bake Off",
-      "genre_id": 2,
+      "genre": "Cooking",
       "seasons": 13,
       "number_of_episodes": 13,
-      "original_language": "English",
-      "ongoing": true,
-      "genre": {
-        "id": 2,
-        "category": "Cooking"
-      }
+      "original_language": "English"
     }
   ]
 }
