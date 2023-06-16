@@ -1,10 +1,8 @@
-import React, { useEffect, useState} from 'react'
+import React, { Fragment, useEffect, useState} from 'react'
 import '../index.css'
 // eslint-disable-next-line
 import AddNewShow from './AddNewShow'
-// eslint-disable-next-line
 import EditableShowRow from './EditableShowRow'
-// eslint-disable-next-line
 import ReadOnlyShowRow from './ReadOnlyShowRow'
 
 
@@ -15,7 +13,8 @@ export default function TVShows() {
     //this will be for the patch 
   // const [editedFormData, setEditedFormData] = useState([])  
     //works with handleEditClick -- to switch between editableshow and readonlyshow
-  // const [editedShowId, setEditedShowID] = useState(null)
+    // eslint-disable-next-line
+  const [editedShowId, setEditedShowID] = useState(null)
 
 
   useEffect(()=> {
@@ -24,6 +23,12 @@ export default function TVShows() {
     .then( showData => setShows(showData)
     )
   }, [])
+
+  const handleEditClick = (e, show) => {
+    e.preventDefault()
+    // console.log(clickedShow)
+    setEditedShowID(show.id)
+  }
 
 
   const handleDeletedShow = (deletedShow) => {
@@ -52,10 +57,15 @@ export default function TVShows() {
           </thead>
           <tbody>
             {
-              shows.map(show => 
-                <ReadOnlyShowRow key={show.id} show={show} handleDeletedShow={handleDeletedShow}/>
-                )
-            }
+              shows.map(show => (
+                <Fragment key={show.id}>
+                  {
+                    editedShowId === show.id ? 
+                    <EditableShowRow /> 
+                    : <ReadOnlyShowRow show={show} handleEditClick={handleEditClick} handleDeletedShow={handleDeletedShow}/> 
+                  }
+                </Fragment>
+              ))}
           </tbody>
         </table>
       </form>
