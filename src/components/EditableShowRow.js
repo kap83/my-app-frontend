@@ -3,15 +3,15 @@ import '../index.css'
 
 export default function EditableShowRow({editedFormData, handleEditFormChange}) {
 
+  //to be able to type in the input field it had to be default value, not value
 
-  
   return (
     <>
       <tr>
        <td>
           <input 
           type='text'
-           value={editedFormData.title}
+          defaultValue={editedFormData.title}
           name='title' 
           required='required' 
           placeholder='Enter A Title'
@@ -21,7 +21,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
        <td>
           <input 
           type='text'
-          value={editedFormData.genre}
+          defaultValue={editedFormData.genre}
           name='Genre' 
           required='required' 
           placeholder='Enter A Genre'
@@ -31,7 +31,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
       <td>
         <input 
           type='text' 
-          value={editedFormData.seasons}
+          defaultValue={editedFormData.seasons}
           name='Seasons' 
           required='required' 
           placeholder='Enter the number of seasons'  
@@ -41,7 +41,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
       <td>
         <input 
           type='text' 
-          value={editedFormData.eps}
+          defaultValue={editedFormData.episodes}
           name='Episodes' 
           required='required' 
           placeholder='Enter the number of episodes'
@@ -49,8 +49,9 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
         />
       </td>
      <td>
-      <input type='text' 
-       value={editedFormData.language}
+      <input 
+        type='text' 
+        defaultValue={editedFormData.language}
         name='Lanuage' 
         required='required' 
         placeholder='Enter the original Language'

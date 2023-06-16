@@ -10,6 +10,8 @@ import ReadOnlyShowRow from './ReadOnlyShowRow'
 export default function TVShows() {
   
   const [shows, setShows] = useState([])
+    //works with handleEditClick -- to switch between editableshow and readonlyshow
+  const [editedShowId, setEditedShowID] = useState(null)
     //this will be for the patch 
   const [editedFormData, setEditedFormData] = useState({
     title: "",
@@ -18,9 +20,6 @@ export default function TVShows() {
     eps: "",
     language: ""
   })  
-    //works with handleEditClick -- to switch between editableshow and readonlyshow
-  const [editedShowId, setEditedShowID] = useState(null)
-
 
   useEffect(()=> {
     fetch("http://localhost:3000/shows")
@@ -32,13 +31,13 @@ export default function TVShows() {
   const handleEditClick = (e, show) => {
     e.preventDefault()
     // console.log(clickedShow)
-    setEditedShowID(show.id)
+   setEditedShowID(show.id)
 
     const formValues = {
       title: show.title,
       genre: show.genre.category,
       seasons: show.seasons,
-      eps: show.number_of_episodes,
+      episodes: show.number_of_episodes,
       language: show.original_language
     }
     setEditedFormData(formValues)
@@ -46,10 +45,9 @@ export default function TVShows() {
 
   const handleEditFormChange = (e) => {
     e.preventDefault()
-    const fieldName = e.target.getAttribute("name")
+    const fieldName = e.target.name
     const fieldValue = e.target.value
-    //const newFormData = {...editedFormData} <--what he did at 33:03
-    const newFormData = [...editedFormData]
+    const newFormData = {...editedFormData}
     newFormData[fieldName] = fieldValue
     setEditedFormData(newFormData) 
   }
@@ -80,7 +78,7 @@ export default function TVShows() {
           </thead>
           <tbody>
             {
-              shows.map(show => (
+              shows?.map(show => (
                 <Fragment key={show.id}>
                   {
                     editedShowId === show.id ? 
