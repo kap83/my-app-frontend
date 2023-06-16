@@ -1,57 +1,40 @@
-import React, {Fragment, useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import '../index.css'
 // eslint-disable-next-line
 import AddNewShow from './AddNewShow'
+// eslint-disable-next-line
 import EditableShowRow from './EditableShowRow'
+// eslint-disable-next-line
 import ReadOnlyShowRow from './ReadOnlyShowRow'
 
 
 // eslint-disable-next-line
-export default function TVShows({shows, handleAddedShow, handleDelete}) {
-
-  //eslint-disable-next-line
-const [editedShowId, setEditedShowID] = useState(null)
-// const [editedFormData, setEditedFormData] = useState([])
-
-
-const handleEditClick = (e, show) => {
-
-  e.preventDefault()
-  console.log(e)
-  setEditedShowID(show.id)
-
-  // const editedShowData = {
-  //   title: title,
-  //   genre: {category: genre},
-  //   seasons: totalSeasons,
-  //   number_of_episodes: totalEpisodes,
-  //   original_language: language
-  // }
+export default function TVShows() {
+  
+  const [shows, setShows] = useState([])
+    //this will be for the patch 
+  // const [editedFormData, setEditedFormData] = useState([])  
+    //works with handleEditClick -- to switch between editableshow and readonlyshow
+  // const [editedShowId, setEditedShowID] = useState(null)
 
 
-  fetch(`http://localhost:9292/shows/${show.id}`, {
-    method: "PATCH", 
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify()
-    })
-    .then((res) => res.json())
-    .then((editedShow) => { console.log(editedShow)
-
-        // CAN YOU PUT THIS PART IN THE JSON.stringify??????
-      // const fieldName = e.target.getAttribute("name")
-      // const fieldValue = e.target.value
-
-  //     // const copyOfShows = [...shows]
-  //     // console.log(copyOfShows)
-  //     // copyOfShows[fieldName] = fieldValue
-  //     // setEditedFormData(copyOfShows)
+  useEffect(()=> {
+    fetch("http://localhost:3000/shows")
+    .then(res => res.json())
+    .then( showData => setShows(showData)
+    )
+  }, [])
 
 
-    })
-    
+  const handleDeletedShow = (deletedShow) => {
+    const findDeletedShowById = shows.find(show => show.id === deletedShow.id )
+    const copyOfShows = [...shows]
+    //1 tells it to only remove the one element
+    copyOfShows.splice(findDeletedShowById, 1)
+    setShows(copyOfShows)
   }
 
-console.log("in tv" , shows)
+// console.log("in tv", shows)
 
   return (
     <div>
@@ -69,15 +52,9 @@ console.log("in tv" , shows)
           </thead>
           <tbody>
             {
-              shows.map((show) => ( 
-                <Fragment>
-                  {
-                  editedShowId === show.id ? (
-                    <EditableShowRow key={show.id} show={show}  />) : (
-                    <ReadOnlyShowRow show={show} handleEditClick={handleEditClick} handleDelete={handleDelete} />)
-                }
-                </Fragment>
-              ))
+              shows.map(show => 
+                <ReadOnlyShowRow key={show.id} show={show} handleDeletedShow={handleDeletedShow}/>
+                )
             }
           </tbody>
         </table>
