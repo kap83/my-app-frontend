@@ -2,16 +2,15 @@
   "shows": [
     {
       "id": 1,
-      "title": "Star Trek: The Original Series",
+      "title": "The Original Series",
       "genre_id": 6,
       "seasons": 3,
       "number_of_episodes": 79,
       "original_language": "English",
       "ongoing": false,
-      "genre": {
-        "id": 6,
-        "category": "Science Fiction"
-      }
+      "genre": "Science Fiction",
+      "episodes": 79,
+      "language": "English"
     },
     {
       "id": 2,
@@ -51,7 +50,6 @@
         "id": 2,
         "category": "Cooking"
       }
-}  
-
+    }
   ]
 }

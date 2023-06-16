@@ -3,9 +3,7 @@ import '../index.css'
 
 export default function ReadOnlyShowRow({show, handleDeletedShow, handleEditClick}) {
 
-// console.log("in readonly", show.id, show.title)
 
-// console.log("readonly", show.genre.category) 
   
   function handleDeleteClick() {
     fetch(`http://localhost:3000/shows/${show.id}`, {

@@ -11,15 +11,19 @@ export default function TVShows() {
   
   const [shows, setShows] = useState([])
     //works with handleEditClick -- to switch between editableshow and readonlyshow
-  const [editedShowId, setEditedShowID] = useState(null)
+  const [editedShowId, setEditedShowId] = useState(null)
     //this will be for the patch 
   const [editedFormData, setEditedFormData] = useState({
     title: "",
-    genre: "",
+    genre: {
+      "id": "",
+      "category": ""
+    },
     seasons: "",
     eps: "",
     language: ""
   })  
+
 
   useEffect(()=> {
     fetch("http://localhost:3000/shows")
@@ -30,8 +34,7 @@ export default function TVShows() {
 
   const handleEditClick = (e, show) => {
     e.preventDefault()
-    // console.log(clickedShow)
-   setEditedShowID(show.id)
+   setEditedShowId(show.id)
 
     const formValues = {
       title: show.title,
@@ -45,6 +48,9 @@ export default function TVShows() {
 
   const handleEditFormChange = (e) => {
     e.preventDefault()
+    console.log("line 49", e)
+    // setEditedFormData({...shows, [e.target.name]: e.target.value})
+
     const fieldName = e.target.name
     const fieldValue = e.target.value
     const newFormData = {...editedFormData}
@@ -52,19 +58,36 @@ export default function TVShows() {
     setEditedFormData(newFormData) 
   }
 
+  const handleEditFormSubmit = (e) => {
+    e.preventDefault()
+
+    fetch(`http://localhost:3000/shows/${editedShowId}`, {
+      method: "PATCH", 
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(editedFormData)
+    })
+    .then((res) => res.json())
+    .then(updatedShowData => console.log(updatedShowData))
+  
+    
+    // setEditedShowId(null)
+  }
+
   const handleDeletedShow = (deletedShow) => {
     const findDeletedShowById = shows.find(show => show.id === deletedShow.id )
     const copyOfShows = [...shows]
-    //1 tells it to only remove the one element
     copyOfShows.splice(findDeletedShowById, 1)
     setShows(copyOfShows)
   }
 
-// console.log("in tv", shows)
+
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleEditFormSubmit}>
         <table>
           <thead>
             <tr>

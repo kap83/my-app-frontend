@@ -5,6 +5,8 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
 
   //to be able to type in the input field it had to be default value, not value
 
+  
+
   return (
     <>
       <tr>
@@ -59,7 +61,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
       />
      </td>
      {/* need to get the show.id and save it into state. this is why we're passing show.  */}
-      <td> <button type='button'>Save</button></td>
+      <td><button type='submit'>Save</button></td>
     </tr>
     </>
   )
