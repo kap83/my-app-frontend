@@ -1,31 +1,24 @@
-import React, { Fragment, useEffect, useState} from 'react'
+import React, { Fragment, useState } from 'react'
 import '../index.css'
-// eslint-disable-next-line
 import AddNewShow from './AddNewShow'
 import EditableShowRow from './EditableShowRow'
 import ReadOnlyShowRow from './ReadOnlyShowRow'
 
 
-// eslint-disable-next-line
-export default function TVShows() {
+
+export default function TVShows({shows, handleShowStateUpdate}) {
+
+  //show is not a function is our new problem
   
-  const [shows, setShows] = useState([])
   const [editedShowId, setEditedShowId] = useState(null)
   const [editedFormData, setEditedFormData] = useState({
     title: "",
-    genre: " ",
+    genre: "",
     seasons: "",
-    eps: "",
+    episodes: "",
     language: ""
   })  
 
-
-  useEffect(()=> {
-    fetch("http://localhost:3000/shows")
-    .then(res => res.json())
-    .then(showData => setShows(showData)
-    )
-  }, [])
 
   const handleEditClick = (e, show) => {
     e.preventDefault()
@@ -35,8 +28,8 @@ export default function TVShows() {
       title: show.title,
       genre: show.genre,
       seasons: show.seasons,
-      episodes: show.number_of_episodes,
-      language: show.original_language
+      episodes: show.episodes,
+      language: show.language
     }
     setEditedFormData(formValues)
   }
@@ -63,24 +56,28 @@ export default function TVShows() {
       },
       body: JSON.stringify(editedFormData)
     })
-    .then((res) => res.json())
-    .then(updatedShowData => console.log(updatedShowData))
-  
-    
-    // setEditedShowId(null)
+    .then((res) => res.json(res))
+    .then(updatedShowData => {
+     handleShowStateUpdate(updatedShowData)
+    })
+    setEditedShowId(null)
+    setEditedFormData("")
   }
 
   const handleDeletedShow = (deletedShow) => {
     const findDeletedShowById = shows.find(show => show.id === deletedShow.id )
     const copyOfShows = [...shows]
     copyOfShows.splice(findDeletedShowById, 1)
-    setShows(copyOfShows)
+    handleShowStateUpdate(copyOfShows)
   }
 
 
 
   return (
+  <>
     <div>
+      <AddNewShow shows={shows} handleShowStateUpdate={handleShowStateUpdate} />
+    </div>
       <form onSubmit={handleEditFormSubmit}>
         <table>
           <thead>
@@ -95,7 +92,7 @@ export default function TVShows() {
           </thead>
           <tbody>
             {
-              shows?.map(show => (
+              shows.map(show => (
                 <Fragment key={show.id}>
                   {
                     editedShowId === show.id ? 
@@ -107,7 +104,6 @@ export default function TVShows() {
           </tbody>
         </table>
       </form>
-    </div>
-
+  </>
   )
 }

@@ -5,7 +5,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
 
   //to be able to type in the input field it had to be default value, not value
 
-  
+  //it's not because of the defaultValue
 
   return (
     <>
@@ -24,7 +24,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
           <input 
           type='text'
           defaultValue={editedFormData.genre}
-          name='Genre' 
+          name='genre' 
           required='required' 
           placeholder='Enter A Genre'
           onChange={handleEditFormChange}
@@ -34,7 +34,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
         <input 
           type='text' 
           defaultValue={editedFormData.seasons}
-          name='Seasons' 
+          name='seasons' 
           required='required' 
           placeholder='Enter the number of seasons'  
           onChange={handleEditFormChange}
@@ -44,7 +44,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
         <input 
           type='text' 
           defaultValue={editedFormData.episodes}
-          name='Episodes' 
+          name='episodes' 
           required='required' 
           placeholder='Enter the number of episodes'
           onChange={handleEditFormChange}
@@ -54,7 +54,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
       <input 
         type='text' 
         defaultValue={editedFormData.language}
-        name='Lanuage' 
+        name='language' 
         required='required' 
         placeholder='Enter the original Language'
         onChange={handleEditFormChange}

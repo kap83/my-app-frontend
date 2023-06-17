@@ -4,10 +4,8 @@
       "id": 1,
       "title": "Star Trek: The Original Series",
       "genre": "Science Fiction",
-      "seasons": 3,
-      "number_of_episodes": 79,
-      "original_language": "English",
-      "episodes": 79,
+      "seasons": "3",
+      "episodes": "79",
       "language": "English"
     },
     {
@@ -15,24 +13,24 @@
       "title": "Stargate SG-1",
       "genre": "Science Fiction",
       "seasons": 10,
-      "number_of_episodes": 214,
-      "original_language": "English"
+      "episodes": 214,
+      "language": "English"
     },
     {
       "id": 3,
       "title": "BattleStar Galactica",
       "genre": "Science Fiction",
       "seasons": 13,
-      "number_of_episodes": 13,
-      "original_language": "English"
+      "episodes": 13,
+      "language": "English"
     },
     {
       "id": 4,
       "title": "The Great British Bake Off",
       "genre": "Cooking",
       "seasons": 13,
-      "number_of_episodes": 13,
-      "original_language": "English"
+      "episodes": 13,
+      "language": "English"
     }
   ]
 }

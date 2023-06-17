@@ -1,33 +1,47 @@
 import React, {useState} from 'react'
 import '../index.css';
 
-export default function AddNewShow({handleAddedShow}) {
+export default function AddNewShow({shows, handleShowStateUpdate}) {
 
-  const [title, setTitle] = useState("")
-  const [genre, setGenre] = useState("")
-  const [totalEpisodes, setTotalEpisodes] = useState("")
-  const [totalSeasons, setTotalSeasons] = useState("")
-  const [language, setLanguage] = useState("")
-  // const [ongoing, setOngoing] = useState("")
+  const [addNewShowData, setAddNewShowData] = useState({
+    title: "",
+    genre: "",
+    seasons: "",
+    episodes: "",
+    language: ""
+  })
 
-  const handleSubmit = (e) => {
+
+
+
+  const handleFormChange = (e) => {
     e.preventDefault()
-    const newShowData = {
-      title: title,
-      genre: {category: genre},
-      seasons: totalSeasons,
-      number_of_episodes: totalEpisodes,
-      original_language: language,
-      // ongoing: ongoing
-    }
 
-    fetch("http://localhost:9292/shows", {
+    setAddNewShowData((shows => ({...shows, [e.target.name]: e.target.value})))
+
+    // eslint-disable-next-line
+    const newShowData = {
+      title: addNewShowData.title,
+      genre: addNewShowData.genre,
+      seasons: addNewShowData.seasons,
+      episodes: addNewShowData.episodes,
+      language: addNewShowData.language,
+     
+    }
+  } 
+   const handleSubmit = (e) => { 
+    e.preventDefault()
+
+    fetch("http://localhost:3000/shows", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(newShowData)
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(addNewShowData)
     })
     .then(res => res.json())
-    .then(updatedShowData => handleAddedShow(updatedShowData))
+    .then(newShowData => handleShowStateUpdate(newShowData))
 
     // setTitle("")
     // setGenre("")
@@ -38,54 +52,41 @@ export default function AddNewShow({handleAddedShow}) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='formStyle'> 
+    <form onSubmit={handleSubmit} > 
       <input 
         type='text'
-        value={title} 
         name='title' 
         required='required' 
         placeholder='Enter A Title'
-        onChange={(e)=> setTitle(e.target.value)}
+        onChange={handleFormChange}
         />
       <input 
         type='text'
-        value={genre} 
-        name='Genre' 
+        name='genre' 
         required='required' 
         placeholder='Enter A Genre'
-        onChange={(e)=> setGenre(e.target.value)}
+        onChange={handleFormChange}
         />
       <input 
         type='text' 
-        value={totalSeasons} 
-        name='Seasons' 
+        name='seasons' 
         required='required' 
         placeholder='Enter the number of seasons'
-        onChange={(e)=> setTotalSeasons(e.target.value)}
+        onChange={handleFormChange}
         />
       <input 
         type='text' 
-        value={totalEpisodes} 
-        name='Episodes' 
+        name='episodes' 
         required='required' 
         placeholder='Enter the number of episodes'
-        onChange={(e)=> setTotalEpisodes(e.target.value)}
+        onChange={handleFormChange}
         />
       <input type='text' 
-      value={language}
-      name='Lanuage' 
+      name='language' 
       required='required' 
       placeholder='Enter the original Language'
-      onChange={(e)=> setLanguage(e.target.value)}
+      onChange={handleFormChange}
       />
-      {/* <input 
-        type='text' 
-        value={ongoing}
-        name='Ongoing?' 
-        required='required' 
-        placeholder='Is it ongoing?'
-        onChange={(e)=> setOngoing(e.target.value)}
-        /> */}
       <button type='submit'>Add</button>
     </form>
   )
