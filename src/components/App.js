@@ -19,11 +19,14 @@ function App() {
   setShows(addedShow)
 }
 
+const handleUpdatedDelArray = (deletedShow) => {
+  setShows(deletedShow)
+}
 
 return (
     <div className="app-container">
     {/* <h1>TV Show Catalogue</h1> */}
-      {shows && <TVShows shows={shows} handleShowStateUpdate={handleShowStateUpdate} />}
+      {shows && <TVShows shows={shows} handleShowStateUpdate={handleShowStateUpdate} handleUpdatedDelArray ={handleUpdatedDelArray} />}
     </div>
   );
 }

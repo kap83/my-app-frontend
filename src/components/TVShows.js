@@ -6,7 +6,7 @@ import ReadOnlyShowRow from './ReadOnlyShowRow'
 
 
 
-export default function TVShows({shows, handleShowStateUpdate}) {
+export default function TVShows({shows, handleShowStateUpdate, handleUpdatedDelArray}) {
 
   //show is not a function is our new problem
   
@@ -68,7 +68,7 @@ export default function TVShows({shows, handleShowStateUpdate}) {
     const findDeletedShowById = shows.find(show => show.id === deletedShow.id )
     const copyOfShows = [...shows]
     copyOfShows.splice(findDeletedShowById, 1)
-    handleShowStateUpdate(copyOfShows)
+    handleUpdatedDelArray(copyOfShows)
   }
 
 
