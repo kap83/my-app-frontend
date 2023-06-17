@@ -2,11 +2,13 @@
   "shows": [
     {
       "id": 1,
-      "title": "The Original Series",
+      "title": "Star Trek: The Original Series",
       "genre": "Science Fiction",
       "seasons": 3,
       "number_of_episodes": 79,
-      "original_language": "English"
+      "original_language": "English",
+      "episodes": 79,
+      "language": "English"
     },
     {
       "id": 2,

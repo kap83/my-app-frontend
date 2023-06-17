@@ -13,10 +13,7 @@ export default function TVShows() {
   const [editedShowId, setEditedShowId] = useState(null)
   const [editedFormData, setEditedFormData] = useState({
     title: "",
-    genre: {
-      "id": "",
-      "category": ""
-    },
+    genre: " ",
     seasons: "",
     eps: "",
     language: ""
@@ -36,7 +33,7 @@ export default function TVShows() {
 
     const formValues = {
       title: show.title,
-      genre: show.genre.category,
+      genre: show.genre,
       seasons: show.seasons,
       episodes: show.number_of_episodes,
       language: show.original_language
@@ -46,14 +43,13 @@ export default function TVShows() {
 
   const handleEditFormChange = (e) => {
     e.preventDefault()
-    console.log("line 49", e)
-    // setEditedFormData({...shows, [e.target.name]: e.target.value})
+    setEditedFormData(shows => ({...shows, [e.target.name]: e.target.value}))
 
-    const fieldName = e.target.name
-    const fieldValue = e.target.value
-    const newFormData = {...editedFormData}
-    newFormData[fieldName] = fieldValue
-    setEditedFormData(newFormData) 
+    // const fieldName = e.target.name
+    // const fieldValue = e.target.value
+    // const newFormData = {...editedFormData}
+    // newFormData[fieldName] = fieldValue
+    // setEditedFormData(newFormData) 
   }
 
   const handleEditFormSubmit = (e) => {

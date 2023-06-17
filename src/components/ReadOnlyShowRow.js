@@ -18,7 +18,7 @@ export default function ReadOnlyShowRow({show, handleDeletedShow, handleEditClic
     <>
        <tr>
                   <td>{show.title}</td>
-                  <td>{show.genre.category}</td>
+                  <td>{show.genre}</td>
                   <td>{show.seasons}</td>
                   <td>{show.number_of_episodes}</td>
                   <td>{show.original_language}</td>
