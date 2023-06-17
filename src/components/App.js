@@ -5,6 +5,7 @@ import TVShows from './TVShows';
 function App() {
 
   const [shows, setShows] = useState([])
+  console.log(shows)
   
   useEffect(()=> {
     fetch("http://localhost:3000/shows")
@@ -15,8 +16,7 @@ function App() {
 
     // eslint-disable-next-line
  const handleShowStateUpdate = (addedShow) => {
-
-  //setShows(addedShow)
+  setShows(addedShow)
 }
 
 
