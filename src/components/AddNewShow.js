@@ -12,8 +12,6 @@ export default function AddNewShow({shows, handleAddedShow}) {
   })
 
 
-
-
   const handleFormChange = (e) => {
     e.preventDefault()
 

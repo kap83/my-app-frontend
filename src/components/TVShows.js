@@ -1,16 +1,24 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import '../index.css'
 import AddNewShow from './AddNewShow'
 import EditableShowRow from './EditableShowRow'
 import ReadOnlyShowRow from './ReadOnlyShowRow'
 
 
-export default function TVShows({shows, handleAddedShow, handleShowEdit, handleUpdatedDelArray}) {
+export default function TVShows() {
 
-  //show is not a function is our new problem
-  
+  const [shows, setShows] = useState([])
+
+  useEffect(()=> {
+    fetch("http://localhost:3000/shows")
+    .then(res => res.json())
+    .then(showData => setShows(showData)
+    )
+  }, [])
+
+
   const [editedShowId, setEditedShowId] = useState(null)
-  const [editedFormData, setEditedFormData] = useState({
+  const [editedShowData, setEditedShowData] = useState({
     title: "",
     genre: "",
     seasons: "",
@@ -18,6 +26,10 @@ export default function TVShows({shows, handleAddedShow, handleShowEdit, handleU
     language: ""
   })  
 
+  const handleAddedShow = (addedShow) => {
+ 
+    setShows(shows => [addedShow, ...shows])
+  }
 
   const handleEditClick = (e, show) => {
     e.preventDefault()
@@ -30,15 +42,14 @@ export default function TVShows({shows, handleAddedShow, handleShowEdit, handleU
       episodes: show.episodes,
       language: show.language
     }
-    setEditedFormData(formValues)
+    setEditedShowData(formValues)
   }
 
   const handleEditFormChange = (e) => {
     e.preventDefault()
     //create clearly variable name for editformdata
-    setEditedFormData(editedFormData => ({...editedFormData, [e.target.name]: e.target.value}))
+    setEditedShowData(editedShowData => ({...editedShowData, [e.target.name]: e.target.value}))
 
-  
   }
 
   const handleEditFormSubmit = (e) => {
@@ -50,22 +61,29 @@ export default function TVShows({shows, handleAddedShow, handleShowEdit, handleU
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(editedFormData)
+      body: JSON.stringify(editedShowData)
     })
     .then((res) => res.json())
     .then(updatedShowData => {
-      console.log("updatedShowData", updatedShowData)
-      handleShowEdit(updatedShowData)
+     
+      //handleShowEdit(updatedShowData)
+
+      const indexOfShowToEdit = shows.findIndex(show => show.id === updatedShowData.id)
+      const copyOfShows = [...shows]
+      copyOfShows[indexOfShowToEdit] = updatedShowData
+      setShows(copyOfShows)
+
+
     })
     setEditedShowId(null)
-    setEditedFormData("")
+    setEditedShowData("")
   }
 
   const handleDeletedShow = (deletedShow) => {
     const IndexOfShowToDelete = shows.findIndex(show => show.id === deletedShow.id )
     const copyOfShows = [...shows]
     copyOfShows.splice(IndexOfShowToDelete, 1)
-    handleUpdatedDelArray(copyOfShows)
+    setShows(copyOfShows)
   }
 
 
@@ -93,7 +111,7 @@ export default function TVShows({shows, handleAddedShow, handleShowEdit, handleU
                 <Fragment key={show.id}>
                   {
                     editedShowId === show.id ? 
-                    <EditableShowRow editedFormData={editedFormData} handleEditFormChange={handleEditFormChange} /> 
+                    <EditableShowRow editedShowData={editedShowData} handleEditFormChange={handleEditFormChange} /> 
                     : <ReadOnlyShowRow show={show} handleEditClick={handleEditClick} handleDeletedShow={handleDeletedShow}/> 
                   }
                 </Fragment>

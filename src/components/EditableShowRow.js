@@ -1,11 +1,8 @@
 import React from 'react'
 import '../index.css'
 
-export default function EditableShowRow({editedFormData, handleEditFormChange}) {
+export default function EditableShowRow({editedShowData, handleEditFormChange}) {
 
-  //to be able to type in the input field it had to be default value, not value
-
-  //it's not because of the defaultValue
 
   return (
     <>
@@ -13,7 +10,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
        <td>
           <input 
           type='text'
-          defaultValue={editedFormData.title}
+          defaultValue={editedShowData.title}
           name='title' 
           required='required' 
           placeholder='Enter A Title'
@@ -23,7 +20,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
        <td>
           <input 
           type='text'
-          defaultValue={editedFormData.genre}
+          defaultValue={editedShowData.genre}
           name='genre' 
           required='required' 
           placeholder='Enter A Genre'
@@ -33,7 +30,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
       <td>
         <input 
           type='text' 
-          defaultValue={editedFormData.seasons}
+          defaultValue={editedShowData.seasons}
           name='seasons' 
           required='required' 
           placeholder='Enter the number of seasons'  
@@ -43,7 +40,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
       <td>
         <input 
           type='text' 
-          defaultValue={editedFormData.episodes}
+          defaultValue={editedShowData.episodes}
           name='episodes' 
           required='required' 
           placeholder='Enter the number of episodes'
@@ -53,7 +50,7 @@ export default function EditableShowRow({editedFormData, handleEditFormChange}) 
      <td>
       <input 
         type='text' 
-        defaultValue={editedFormData.language}
+        defaultValue={editedShowData.language}
         name='language' 
         required='required' 
         placeholder='Enter the original Language'
