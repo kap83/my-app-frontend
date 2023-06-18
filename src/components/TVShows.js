@@ -5,8 +5,7 @@ import EditableShowRow from './EditableShowRow'
 import ReadOnlyShowRow from './ReadOnlyShowRow'
 
 
-
-export default function TVShows({shows, handleShowStateUpdate, handleUpdatedDelArray}) {
+export default function TVShows({shows, handleAddedShow, handleShowEdit, handleUpdatedDelArray}) {
 
   //show is not a function is our new problem
   
@@ -36,13 +35,10 @@ export default function TVShows({shows, handleShowStateUpdate, handleUpdatedDelA
 
   const handleEditFormChange = (e) => {
     e.preventDefault()
-    setEditedFormData(shows => ({...shows, [e.target.name]: e.target.value}))
+    //create clearly variable name for editformdata
+    setEditedFormData(editedFormData => ({...editedFormData, [e.target.name]: e.target.value}))
 
-    // const fieldName = e.target.name
-    // const fieldValue = e.target.value
-    // const newFormData = {...editedFormData}
-    // newFormData[fieldName] = fieldValue
-    // setEditedFormData(newFormData) 
+  
   }
 
   const handleEditFormSubmit = (e) => {
@@ -56,18 +52,19 @@ export default function TVShows({shows, handleShowStateUpdate, handleUpdatedDelA
       },
       body: JSON.stringify(editedFormData)
     })
-    .then((res) => res.json(res))
+    .then((res) => res.json())
     .then(updatedShowData => {
-     handleShowStateUpdate(updatedShowData)
+      console.log("updatedShowData", updatedShowData)
+      handleShowEdit(updatedShowData)
     })
     setEditedShowId(null)
     setEditedFormData("")
   }
 
   const handleDeletedShow = (deletedShow) => {
-    const findDeletedShowById = shows.find(show => show.id === deletedShow.id )
+    const IndexOfShowToDelete = shows.findIndex(show => show.id === deletedShow.id )
     const copyOfShows = [...shows]
-    copyOfShows.splice(findDeletedShowById, 1)
+    copyOfShows.splice(IndexOfShowToDelete, 1)
     handleUpdatedDelArray(copyOfShows)
   }
 
@@ -76,7 +73,7 @@ export default function TVShows({shows, handleShowStateUpdate, handleUpdatedDelA
   return (
   <>
     <div>
-      <AddNewShow shows={shows} handleShowStateUpdate={handleShowStateUpdate} />
+      <AddNewShow shows={shows} handleAddedShow={handleAddedShow} />
     </div>
       <form onSubmit={handleEditFormSubmit}>
         <table>

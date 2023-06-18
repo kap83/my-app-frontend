@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import '../index.css';
 
-export default function AddNewShow({shows, handleShowStateUpdate}) {
+export default function AddNewShow({shows, handleAddedShow}) {
 
   const [addNewShowData, setAddNewShowData] = useState({
     title: "",
@@ -41,7 +41,7 @@ export default function AddNewShow({shows, handleShowStateUpdate}) {
       body: JSON.stringify(addNewShowData)
     })
     .then(res => res.json())
-    .then(newShowData => handleShowStateUpdate(newShowData))
+    .then(newShowData => handleAddedShow(newShowData))
 
     // setTitle("")
     // setGenre("")

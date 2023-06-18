@@ -25,12 +25,20 @@
       "language": "English"
     },
     {
-      "id": 4,
-      "title": "The Great British Bake Off",
+      "title": "Leverage",
+      "genre": "Action",
+      "seasons": "10",
+      "episodes": "100",
+      "language": "English",
+      "id": 4
+    },
+    {
+      "title": "GBBO",
       "genre": "Cooking",
-      "seasons": 13,
-      "episodes": 13,
-      "language": "English"
+      "seasons": "1",
+      "episodes": "9",
+      "language": "English",
+      "id": 5
     }
   ]
 }
