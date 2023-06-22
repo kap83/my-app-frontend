@@ -12,7 +12,7 @@ export default function AddNewShow({ListOfGenres, shows, handleAddedShow}) {
 
   const [genre, setGenre] = useState([])
 
-  console.log(genre)
+  //console.log(genre)
 
   const handleFormChange = (e) => {
     e.preventDefault()
@@ -42,11 +42,9 @@ export default function AddNewShow({ListOfGenres, shows, handleAddedShow}) {
     .then(res => res.json())
     .then(newShowData => handleAddedShow(newShowData))
     
-    //setAddNewShowData(" ")
-    
   }
 
-  const fillDropDown = ListOfGenres?.map(genre => (
+  const optionsForDropDown = ListOfGenres?.map(genre => (
     <option key={genre.id} value={genre.id}>{genre.name}</option>
   ))
 
@@ -64,7 +62,7 @@ export default function AddNewShow({ListOfGenres, shows, handleAddedShow}) {
       onChange={(e) => setGenre(e.target.value)}
      >
       <option>Select Genre</option>
-        {fillDropDown}
+        {optionsForDropDown}
      </select>
 
       <input 

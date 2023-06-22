@@ -58,7 +58,6 @@ export default function TVShows() {
 
   const handleEditFormChange = (e) => {
     e.preventDefault()
-    //create clearer variable name for editformdata
     setEditedShowData(editedShowData => ({...editedShowData, [e.target.name]: e.target.value}))
 
   }
@@ -84,7 +83,6 @@ export default function TVShows() {
       const copyOfShows = [...shows]
       copyOfShows[indexOfShowToEdit] = updatedShowData
       setShows(copyOfShows)
-
 
     })
     setEditedShowId(null)
