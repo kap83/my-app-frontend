@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import '../index.css';
 
-export default function AddNewShow({genresList, shows, handleAddedShow}) {
+export default function AddNewShow({ListOfGenres, shows, handleAddedShow}) {
 
   const [addNewShowData, setAddNewShowData] = useState({
     title: "",
@@ -46,7 +46,7 @@ export default function AddNewShow({genresList, shows, handleAddedShow}) {
     
   }
 
-  const fillDropDown = genresList?.map(genre => (
+  const fillDropDown = ListOfGenres?.map(genre => (
     <option key={genre.id} value={genre.id}>{genre.name}</option>
   ))
 

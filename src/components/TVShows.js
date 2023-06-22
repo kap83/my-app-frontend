@@ -16,14 +16,14 @@ export default function TVShows() {
     )
   }, [])
 
-  const [genresList, setGenresList] = useState([])
+  const [ListOfGenres, setListOfGenres] = useState([])
 
   //console.log(genres)
 
   useEffect(()=> {
     fetch("http://localhost:9292/genres")
     .then(res => res.json())
-    .then(genreData => setGenresList(genreData))
+    .then(genreData => setListOfGenres(genreData))
   }, [])
 
 
@@ -106,7 +106,7 @@ export default function TVShows() {
   return (
   <>
     <div>
-      <AddNewShow genresList={genresList} shows={shows} handleAddedShow={handleAddedShow} />
+      <AddNewShow ListOfGenres={ListOfGenres} shows={shows} handleAddedShow={handleAddedShow} />
     </div>
       <form onSubmit={handleEditFormSubmit}>
         <table>
