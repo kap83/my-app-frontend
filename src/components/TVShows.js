@@ -9,8 +9,11 @@ export default function TVShows() {
 
   const [shows, setShows] = useState([])
 
+  console.log(shows)
+
+
   useEffect(()=> {
-    fetch("http://localhost:3000/shows")
+    fetch("http://localhost:9292/shows")
     .then(res => res.json())
     .then(showData => setShows(showData)
     )
@@ -27,7 +30,6 @@ export default function TVShows() {
   })  
 
   const handleAddedShow = (addedShow) => {
- 
     setShows(shows => [addedShow, ...shows])
   }
 
@@ -35,19 +37,21 @@ export default function TVShows() {
     e.preventDefault()
    setEditedShowId(show.id)
 
+
     const formValues = {
       title: show.title,
-      genre: show.genre,
+      genre: show.genre.name,
       seasons: show.seasons,
       episodes: show.episodes,
       language: show.language
     }
+    console.log("formValues", formValues)
     setEditedShowData(formValues)
   }
 
   const handleEditFormChange = (e) => {
     e.preventDefault()
-    //create clearly variable name for editformdata
+    //create clearer variable name for editformdata
     setEditedShowData(editedShowData => ({...editedShowData, [e.target.name]: e.target.value}))
 
   }
@@ -55,7 +59,8 @@ export default function TVShows() {
   const handleEditFormSubmit = (e) => {
     e.preventDefault()
 
-    fetch(`http://localhost:3000/shows/${editedShowId}`, {
+
+    fetch(`http://localhost:9292/shows/${editedShowId}`, {
       method: "PATCH", 
       headers: {
         "Accept": "application/json",
@@ -79,13 +84,16 @@ export default function TVShows() {
     setEditedShowData("")
   }
 
+  const handleCancelClick = () => {
+    setEditedShowId(null);
+  };
+
   const handleDeletedShow = (deletedShow) => {
     const IndexOfShowToDelete = shows.findIndex(show => show.id === deletedShow.id )
     const copyOfShows = [...shows]
     copyOfShows.splice(IndexOfShowToDelete, 1)
     setShows(copyOfShows)
   }
-
 
 
   return (
@@ -111,7 +119,7 @@ export default function TVShows() {
                 <Fragment key={show.id}>
                   {
                     editedShowId === show.id ? 
-                    <EditableShowRow editedShowData={editedShowData} handleEditFormChange={handleEditFormChange} /> 
+                    <EditableShowRow editedShowData={editedShowData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} /> 
                     : <ReadOnlyShowRow show={show} handleEditClick={handleEditClick} handleDeletedShow={handleDeletedShow}/> 
                   }
                 </Fragment>

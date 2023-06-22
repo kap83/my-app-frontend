@@ -6,7 +6,7 @@ export default function ReadOnlyShowRow({show, handleDeletedShow, handleEditClic
 
   
   function handleDeleteClick() {
-    fetch(`http://localhost:3000/shows/${show.id}`, {
+    fetch(`http://localhost:9292/shows/${show.id}`, {
       method: "DELETE", 
     })
     .then((res) => res.json())
@@ -18,7 +18,7 @@ export default function ReadOnlyShowRow({show, handleDeletedShow, handleEditClic
     <>
        <tr>
                   <td>{show.title}</td>
-                  <td>{show.genre}</td>
+                  <td>{show.genre.name}</td>
                   <td>{show.seasons}</td>
                   <td>{show.episodes}</td>
                   <td>{show.language}</td>

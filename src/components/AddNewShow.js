@@ -11,7 +11,6 @@ export default function AddNewShow({shows, handleAddedShow}) {
     language: ""
   })
 
-
   const handleFormChange = (e) => {
     e.preventDefault()
 
@@ -20,17 +19,17 @@ export default function AddNewShow({shows, handleAddedShow}) {
     // eslint-disable-next-line
     const newShowData = {
       title: addNewShowData.title,
-      genre: addNewShowData.genre,
+      // genre: addNewShowData.genre,
       seasons: addNewShowData.seasons,
       episodes: addNewShowData.episodes,
       language: addNewShowData.language,
-     
     }
   } 
+
    const handleSubmit = (e) => { 
     e.preventDefault()
 
-    fetch("http://localhost:3000/shows", {
+    fetch("http://localhost:9292/genres/:genre_id/shows", {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -40,13 +39,9 @@ export default function AddNewShow({shows, handleAddedShow}) {
     })
     .then(res => res.json())
     .then(newShowData => handleAddedShow(newShowData))
-
-    // setTitle("")
-    // setGenre("")
-    // setTotalEpisodes("")
-    // setTotalSeasons("")
-    // setLanguage("")
-    // setOngoing("")
+    
+    //setAddNewShowData(" ")
+    
   }
 
   return (

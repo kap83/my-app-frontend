@@ -1,7 +1,8 @@
 import React from 'react'
 import '../index.css'
 
-export default function EditableShowRow({editedShowData, handleEditFormChange}) {
+export default function EditableShowRow({editedShowData, handleCancelClick, handleEditFormChange}) {
+//console.log("editableshow", editedShowData)
 
 
   return (
@@ -17,7 +18,7 @@ export default function EditableShowRow({editedShowData, handleEditFormChange}) 
           onChange={handleEditFormChange}
         />
        </td>
-       <td>
+        <td>
           <input 
           type='text'
           defaultValue={editedShowData.genre}
@@ -27,6 +28,7 @@ export default function EditableShowRow({editedShowData, handleEditFormChange}) 
           onChange={handleEditFormChange}
           />
         </td>
+
       <td>
         <input 
           type='text' 
@@ -58,7 +60,8 @@ export default function EditableShowRow({editedShowData, handleEditFormChange}) 
       />
      </td>
      {/* need to get the show.id and save it into state. this is why we're passing show.  */}
-      <td><button type='submit'>Save</button></td>
+      <td><button type='submit'>Save</button>
+      <button type='button' onClick={handleCancelClick}>Cancel</button></td>
     </tr>
     </>
   )
