@@ -9,14 +9,21 @@ export default function TVShows() {
 
   const [shows, setShows] = useState([])
 
-  console.log(shows)
-
-
   useEffect(()=> {
     fetch("http://localhost:9292/shows")
     .then(res => res.json())
     .then(showData => setShows(showData)
     )
+  }, [])
+
+  const [genresList, setGenresList] = useState([])
+
+  //console.log(genres)
+
+  useEffect(()=> {
+    fetch("http://localhost:9292/genres")
+    .then(res => res.json())
+    .then(genreData => setGenresList(genreData))
   }, [])
 
 
@@ -99,7 +106,7 @@ export default function TVShows() {
   return (
   <>
     <div>
-      <AddNewShow shows={shows} handleAddedShow={handleAddedShow} />
+      <AddNewShow genresList={genresList} shows={shows} handleAddedShow={handleAddedShow} />
     </div>
       <form onSubmit={handleEditFormSubmit}>
         <table>

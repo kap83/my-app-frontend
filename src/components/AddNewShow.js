@@ -1,15 +1,18 @@
 import React, {useState} from 'react'
 import '../index.css';
 
-export default function AddNewShow({shows, handleAddedShow}) {
+export default function AddNewShow({genresList, shows, handleAddedShow}) {
 
   const [addNewShowData, setAddNewShowData] = useState({
     title: "",
-    genre: "",
     seasons: "",
     episodes: "",
     language: ""
   })
+
+  const [genre, setGenre] = useState([])
+
+  console.log(genre)
 
   const handleFormChange = (e) => {
     e.preventDefault()
@@ -19,7 +22,6 @@ export default function AddNewShow({shows, handleAddedShow}) {
     // eslint-disable-next-line
     const newShowData = {
       title: addNewShowData.title,
-      // genre: addNewShowData.genre,
       seasons: addNewShowData.seasons,
       episodes: addNewShowData.episodes,
       language: addNewShowData.language,
@@ -29,7 +31,7 @@ export default function AddNewShow({shows, handleAddedShow}) {
    const handleSubmit = (e) => { 
     e.preventDefault()
 
-    fetch("http://localhost:9292/genres/:genre_id/shows", {
+    fetch(`http://localhost:9292/genres/${genre}/shows`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -44,6 +46,10 @@ export default function AddNewShow({shows, handleAddedShow}) {
     
   }
 
+  const fillDropDown = genresList?.map(genre => (
+    <option key={genre.id} value={genre.id}>{genre.name}</option>
+  ))
+
   return (
     <form onSubmit={handleSubmit} > 
       <input 
@@ -53,13 +59,14 @@ export default function AddNewShow({shows, handleAddedShow}) {
         placeholder='Enter A Title'
         onChange={handleFormChange}
         />
-      <input 
-        type='text'
-        name='genre' 
-        required='required' 
-        placeholder='Enter A Genre'
-        onChange={handleFormChange}
-        />
+     <select
+      value={genre}
+      onChange={(e) => setGenre(e.target.value)}
+     >
+      <option>Select Genre</option>
+        {fillDropDown}
+     </select>
+
       <input 
         type='text' 
         name='seasons' 

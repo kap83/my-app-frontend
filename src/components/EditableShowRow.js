@@ -2,7 +2,7 @@ import React from 'react'
 import '../index.css'
 
 export default function EditableShowRow({editedShowData, handleCancelClick, handleEditFormChange}) {
-//console.log("editableshow", editedShowData)
+
 
 
   return (
