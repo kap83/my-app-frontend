@@ -1,9 +1,14 @@
 import React from 'react'
 import '../index.css'
 
-export default function EditableShowRow({editedShowData, handleCancelClick, handleEditFormChange}) {
+export default function EditableShowRow({handleDropDownSelectionClick, selectedGenre, editedShowData, optionsForDropDown, handleCancelClick, handleEditFormChange}) {
 
 
+  const handleGenreSelection = (e) => {
+
+    console.log("e", e.target.value)
+    handleDropDownSelectionClick(e.target.value)
+  }
 
   return (
     <>
@@ -18,15 +23,15 @@ export default function EditableShowRow({editedShowData, handleCancelClick, hand
           onChange={handleEditFormChange}
         />
        </td>
+
         <td>
-          <input 
-          type='text'
-          defaultValue={editedShowData.genre}
-          name='genre' 
-          required='required' 
-          placeholder='Enter A Genre'
-          onChange={handleEditFormChange}
-          />
+        <select
+          value={selectedGenre}
+          onChange={handleGenreSelection}
+     >
+      <option>{editedShowData.genre}</option>
+        {optionsForDropDown}
+     </select>
         </td>
 
       <td>

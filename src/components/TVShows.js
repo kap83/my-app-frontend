@@ -18,7 +18,7 @@ export default function TVShows() {
 
   const [ListOfGenres, setListOfGenres] = useState([])
 
-  //console.log(genres)
+    console.log(ListOfGenres)
 
   useEffect(()=> {
     fetch("http://localhost:9292/genres")
@@ -26,7 +26,9 @@ export default function TVShows() {
     .then(genreData => setListOfGenres(genreData))
   }, [])
 
-
+//using "" instead of the [] in selectedGenre's use state, removes the scalar error.
+//only use an array when you're doing multiple searches
+  const [selectedGenre, setSelectedGenre] = useState("")
   const [editedShowId, setEditedShowId] = useState(null)
   const [editedShowData, setEditedShowData] = useState({
     title: "",
@@ -36,9 +38,9 @@ export default function TVShows() {
     language: ""
   })  
 
-  const handleAddedShow = (addedShow) => {
-    setShows(shows => [addedShow, ...shows])
-  }
+  const handleDropDownSelectionClick = (genreId) => {
+    setSelectedGenre(genreId)
+}
 
   const handleEditClick = (e, show) => {
     e.preventDefault()
@@ -52,7 +54,6 @@ export default function TVShows() {
       episodes: show.episodes,
       language: show.language
     }
-    console.log("formValues", formValues)
     setEditedShowData(formValues)
   }
 
@@ -65,8 +66,7 @@ export default function TVShows() {
   const handleEditFormSubmit = (e) => {
     e.preventDefault()
 
-
-    fetch(`http://localhost:9292/shows/${editedShowId}`, {
+    fetch(`/genres/${selectedGenre}/shows/${editedShowId}`, {
       method: "PATCH", 
       headers: {
         "Accept": "application/json",
@@ -89,6 +89,10 @@ export default function TVShows() {
     setEditedShowData("")
   }
 
+  const handleAddedShow = (addedShow) => {
+    setShows(shows => [addedShow, ...shows])
+  }
+
   const handleCancelClick = () => {
     setEditedShowId(null);
   };
@@ -100,11 +104,15 @@ export default function TVShows() {
     setShows(copyOfShows)
   }
 
+  const optionsForDropDown = ListOfGenres.map(genre => (
+    <option key={genre.id} value={genre.id}>{genre.name}</option>
+  ))
+
 
   return (
   <>
     <div>
-      <AddNewShow ListOfGenres={ListOfGenres} shows={shows} handleAddedShow={handleAddedShow} />
+      <AddNewShow optionsForDropDown={optionsForDropDown} shows={shows} handleAddedShow={handleAddedShow} />
     </div>
       <form onSubmit={handleEditFormSubmit}>
         <table>
@@ -124,7 +132,7 @@ export default function TVShows() {
                 <Fragment key={show.id}>
                   {
                     editedShowId === show.id ? 
-                    <EditableShowRow editedShowData={editedShowData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} /> 
+                    <EditableShowRow handleDropDownSelectionClick={handleDropDownSelectionClick} selectedGenre={selectedGenre} editedShowData={editedShowData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} optionsForDropDown={optionsForDropDown} /> 
                     : <ReadOnlyShowRow show={show} handleEditClick={handleEditClick} handleDeletedShow={handleDeletedShow}/> 
                   }
                 </Fragment>

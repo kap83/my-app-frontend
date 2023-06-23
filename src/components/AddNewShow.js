@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import '../index.css';
 
-export default function AddNewShow({ListOfGenres, shows, handleAddedShow}) {
+export default function AddNewShow({optionsForDropDown, handleDropDownSelectionClick, shows, handleAddedShow}) {
 
   const [addNewShowData, setAddNewShowData] = useState({
     title: "",
@@ -10,7 +10,8 @@ export default function AddNewShow({ListOfGenres, shows, handleAddedShow}) {
     language: ""
   })
 
-  const [genre, setGenre] = useState([])
+  const [selectedGenre, setSelectedGenre] = useState("")
+
 
   //console.log(genre)
 
@@ -19,19 +20,12 @@ export default function AddNewShow({ListOfGenres, shows, handleAddedShow}) {
 
     setAddNewShowData((shows => ({...shows, [e.target.name]: e.target.value})))
 
-    // eslint-disable-next-line
-    const newShowData = {
-      title: addNewShowData.title,
-      seasons: addNewShowData.seasons,
-      episodes: addNewShowData.episodes,
-      language: addNewShowData.language,
-    }
   } 
 
    const handleSubmit = (e) => { 
     e.preventDefault()
 
-    fetch(`http://localhost:9292/genres/${genre}/shows`, {
+    fetch(`http://localhost:9292/genres/${selectedGenre}/shows`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -41,12 +35,12 @@ export default function AddNewShow({ListOfGenres, shows, handleAddedShow}) {
     })
     .then(res => res.json())
     .then(newShowData => handleAddedShow(newShowData))
+
+    setAddNewShowData("")
     
   }
 
-  const optionsForDropDown = ListOfGenres?.map(genre => (
-    <option key={genre.id} value={genre.id}>{genre.name}</option>
-  ))
+ 
 
   return (
     <form onSubmit={handleSubmit} > 
@@ -58,8 +52,8 @@ export default function AddNewShow({ListOfGenres, shows, handleAddedShow}) {
         onChange={handleFormChange}
         />
      <select
-      value={genre}
-      onChange={(e) => setGenre(e.target.value)}
+      value={selectedGenre}
+      onChange={(e) => setSelectedGenre(e.target.value)}
      >
       <option>Select Genre</option>
         {optionsForDropDown}

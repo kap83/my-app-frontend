@@ -13,7 +13,6 @@ export default function ReadOnlyShowRow({show, handleDeletedShow, handleEditClic
     .then(() => handleDeletedShow(show))
     }
 
-    console.log(show.name)
 
   return (
     <>
