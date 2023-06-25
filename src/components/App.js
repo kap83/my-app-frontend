@@ -7,7 +7,7 @@ import Shows from './Shows'
 
 export default function App() {
 
-  // eslint-disable-next-line
+ 
   const [genresData, setGenresData] = useState([])
 
   useEffect(() => {
