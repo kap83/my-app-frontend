@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import '../index.css';
 
-export default function AddNewShow({optionsForDropDown, handleDropDownSelectionClick, shows, handleAddedShow}) {
+export default function AddNewShow({shows, handleAddedShow}) {
 
   const [addNewShowData, setAddNewShowData] = useState({
     title: "",
@@ -10,7 +10,7 @@ export default function AddNewShow({optionsForDropDown, handleDropDownSelectionC
     language: ""
   })
 
-  const [selectedGenre, setSelectedGenre] = useState("")
+  //const [selectedGenre, setSelectedGenre] = useState("")
 
 
   //console.log(genre)
@@ -25,7 +25,7 @@ export default function AddNewShow({optionsForDropDown, handleDropDownSelectionC
    const handleSubmit = (e) => { 
     e.preventDefault()
 
-    fetch(`http://localhost:9292/genres/${selectedGenre}/shows`, {
+    fetch(`http://localhost:9292/genres//shows`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -51,13 +51,13 @@ export default function AddNewShow({optionsForDropDown, handleDropDownSelectionC
         placeholder='Enter A Title'
         onChange={handleFormChange}
         />
-     <select
+     {/* <select
       value={selectedGenre}
       onChange={(e) => setSelectedGenre(e.target.value)}
      >
       <option>Select Genre</option>
         {optionsForDropDown}
-     </select>
+     </select> */}
 
       <input 
         type='text' 
