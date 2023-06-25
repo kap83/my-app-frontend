@@ -37,6 +37,7 @@ export default function TVShows() {
   const handleEditClick = (e, show) => {
     e.preventDefault()
    setEditedShowId(show.id)
+   
 
 
     const formValues = {

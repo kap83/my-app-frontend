@@ -1,40 +1,108 @@
 
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
 import {useParams} from 'react-router-dom'
+import ReadOnlyShowRow from './ReadOnlyShowRow'
+import EditableShowRow from './EditableShowRow'
 
- // eslint-disable-next-line
 export default function Shows({genresData}) {
 
 const {id} = useParams()
 const parseId = parseInt(id)
 
-
-const [shows, setShows] = useState({
+const [genre, setGenre] = useState({
   name: "",
   shows: []
 })
 
 useEffect(() => {
-  const findShows = genresData?.find(genre => genre.id === parseId)
-    setShows(findShows)
+  const findGenre = genresData?.find(genre => genre.id === parseId)
+    setGenre(findGenre)
   // eslint-disable-next-line
 }, [genresData])
 
-//console.log("in shows", shows)
 
 
+// eslint-disable-next-line
+const [editedShowId, setEditedShowId] = useState(null)
+// eslint-disable-next-line
+const [editableShowData, setEditableShowData] = useState({
+  title: "",
+  genre: "",
+  seasons: "",
+  episodes: "",
+  language: ""
+})  
+
+//console.log("right id?", editedShowId)
+
+const handleEditClick = (e, show) => {
+  e.preventDefault()
+  setEditedShowId(show.id)
+
+// eslint-disable-next-line
+  const formValues = {
+      title: show.title,
+      seasons: show.seasons,
+      episodes: show.episodes,
+      language: show.language 
+  }
+  setEditableShowData(formValues)
+}
+
+const handleCancelClick = () => {
+  setEditedShowId(null)
+}
 
 
   return (
     <>
-    <h2>{shows.name}</h2>
-    {
-      shows.shows.map(show => (
-        <div key={show.id}>
-          <p>{show.title}</p>
-        </div>
-      ))
-    }
+    <h2>{genre.name}</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>TITLE</th>
+          <th>SEASONS</th>
+          <th>EPISODES</th>
+          <th>LANGUAGE</th>
+          <th>ACTIONS</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        { 
+        genre.shows.map(show => (
+       <Fragment key={show.id}>
+        {
+          editedShowId === show.id ? 
+          <EditableShowRow 
+          editableShowData={editableShowData}
+          handleCancelClick={handleCancelClick}
+          /> 
+          : <ReadOnlyShowRow 
+          handleEditClick={handleEditClick}
+          show={show}
+        />
+        }
+       </Fragment>
+        )) 
+        } 
+      </tbody>
+
+
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+   
+   
 
     </>
   )

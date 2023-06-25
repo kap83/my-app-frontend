@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Link, Route, Routes} from 'react-router-dom'
+import { Route, Routes} from 'react-router-dom'
 import Home from './Home'
 import Genres from './Genres'
 import Genre from './Genre'
@@ -23,13 +23,11 @@ export default function App() {
     <Routes location="/">
       <Route path="/" element={<Home />} />
     </Routes>
-    <nav>
-      <h2><Link to='/genres'>GENRES</Link></h2>
-    </nav>
     <Routes>
-      <Route path='/genres' element={<Genres genresData={genresData} />} />
-      <Route path=':id' element={<Genre />} />
-      <Route path='genres/:id/shows' element={<Shows genresData={genresData} />} />
+        <Route path='/genres'/>
+          <Route index element={<Genres genresData={genresData} />} />
+          <Route path=':id' element={<Genre />}/>
+        <Route path='genres/:id/shows' element={<Shows genresData={genresData} />} />
     </Routes>
    </>
   )
