@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function EditableShowRow({editableShowData, handleCancelClick}) {
+export default function EditableShowRow({editableShowData, handleEditFormChange, handleCancelClick}) {
   return (
     <>
       <tr>
@@ -11,7 +11,7 @@ export default function EditableShowRow({editableShowData, handleCancelClick}) {
             name="title"
             required='required'
             placeholder='Title'
-            //onChange={}
+            onChange={handleEditFormChange}
           />
         </td>
         <td>
@@ -21,7 +21,7 @@ export default function EditableShowRow({editableShowData, handleCancelClick}) {
           name='seasons' 
           required='required' 
           placeholder='seasons'  
-          //onChange={handleEditFormChange}
+          onChange={handleEditFormChange}
         />
       </td>
       <td>
@@ -31,7 +31,7 @@ export default function EditableShowRow({editableShowData, handleCancelClick}) {
           name='episodes' 
           required='required' 
           placeholder='Episodes'
-          //onChange={handleEditFormChange}
+          onChange={handleEditFormChange}
         />
       </td>
       <td>
@@ -41,7 +41,7 @@ export default function EditableShowRow({editableShowData, handleCancelClick}) {
         name='language' 
         required='required' 
         placeholder='Language'
-        //onChange={handleEditFormChange}
+        onChange={handleEditFormChange}
       />
       </td>
       <td>

@@ -4,8 +4,8 @@ import {useParams} from 'react-router-dom'
 import ReadOnlyShowRow from './ReadOnlyShowRow'
 import EditableShowRow from './EditableShowRow'
 
-export default function Shows({genresData}) {
-
+export default function Shows({genresData, handleDeletedShow, handleGenresDataUpdate}) {
+// const params = useParams()
 const {id} = useParams()
 const parseId = parseInt(id)
 
@@ -21,30 +21,26 @@ useEffect(() => {
 }, [genresData])
 
 
-
-// eslint-disable-next-line
 const [editedShowId, setEditedShowId] = useState(null)
-// eslint-disable-next-line
 const [editableShowData, setEditableShowData] = useState({
   title: "",
-  genre: "",
   seasons: "",
   episodes: "",
   language: ""
 })  
 
-//console.log("right id?", editedShowId)
-
 const handleEditClick = (e, show) => {
   e.preventDefault()
+  console.log("in shows", show)
   setEditedShowId(show.id)
 
-// eslint-disable-next-line
   const formValues = {
+      id: show.id,
       title: show.title,
       seasons: show.seasons,
       episodes: show.episodes,
-      language: show.language 
+      language: show.language, 
+      genre_id: show.genre_id
   }
   setEditableShowData(formValues)
 }
@@ -53,10 +49,42 @@ const handleCancelClick = () => {
   setEditedShowId(null)
 }
 
+const handleEditFormChange = (e) => {
+  e.preventDefault()
+  setEditableShowData(editableShowData => ({...editableShowData, [e.target.name]: e.target.value}))
+
+}
+
+const handleEditShowSubmit = (e) => {
+  e.preventDefault()
+
+  console.log("wtf", editableShowData.genre_id)
+ 
+  fetch(`${editableShowData.genre_id}/shows/${editableShowData.id}`, {
+    method: "PATCH",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(editableShowData)
+  })
+  .then(res => res.json())
+  .then(editedShowData => {
+
+    const indexOfShowToEdit = genresData.findIndex(genre => genre.id === editedShowData.id)
+    const copyOfGenresData = [...genresData]
+    copyOfGenresData[indexOfShowToEdit] = editableShowData
+    //handleGenresDataUpdate(copyOfGenresData)
+  })
+}
+
+
+
 
   return (
     <>
     <h2>{genre.name}</h2>
+    <form onSubmit={handleEditShowSubmit}>
     <table>
       <thead>
         <tr>
@@ -65,7 +93,6 @@ const handleCancelClick = () => {
           <th>EPISODES</th>
           <th>LANGUAGE</th>
           <th>ACTIONS</th>
-
         </tr>
       </thead>
       <tbody>
@@ -77,32 +104,21 @@ const handleCancelClick = () => {
           <EditableShowRow 
           editableShowData={editableShowData}
           handleCancelClick={handleCancelClick}
+          handleEditFormChange={handleEditFormChange}
           /> 
           : <ReadOnlyShowRow 
           handleEditClick={handleEditClick}
           show={show}
+          handleDeletedShow={handleDeletedShow}
         />
         }
        </Fragment>
         )) 
         } 
       </tbody>
-
-
-
     </table>
+    </form>
 
-
-
-
-
-
-
-
-
-
-   
-   
 
     </>
   )

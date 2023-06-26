@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import '../index.css';
 
-export default function AddNewShow({shows, handleAddedShow}) {
+export default function AddNewShow({genresAndShows, handleAddedShow}) {
 
   const [addNewShowData, setAddNewShowData] = useState({
     title: "",
@@ -10,11 +10,8 @@ export default function AddNewShow({shows, handleAddedShow}) {
     language: ""
   })
 
-  //const [selectedGenre, setSelectedGenre] = useState("")
 
-
-  //console.log(genre)
-
+// eslint-disable-next-line
   const handleFormChange = (e) => {
     e.preventDefault()
 
@@ -49,7 +46,7 @@ export default function AddNewShow({shows, handleAddedShow}) {
         name='title' 
         required='required' 
         placeholder='Enter A Title'
-        onChange={handleFormChange}
+        //onChange={handleFormChange}
         />
      {/* <select
       value={selectedGenre}
@@ -64,20 +61,20 @@ export default function AddNewShow({shows, handleAddedShow}) {
         name='seasons' 
         required='required' 
         placeholder='Enter the number of seasons'
-        onChange={handleFormChange}
+        //onChange={handleFormChange}
         />
       <input 
         type='text' 
         name='episodes' 
         required='required' 
         placeholder='Enter the number of episodes'
-        onChange={handleFormChange}
+        //onChange={handleFormChange}
         />
       <input type='text' 
       name='language' 
       required='required' 
       placeholder='Enter the original Language'
-      onChange={handleFormChange}
+      //onChange={handleFormChange}
       />
       <button type='submit'>Add</button>
     </form>

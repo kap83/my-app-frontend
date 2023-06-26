@@ -4,6 +4,7 @@ import Home from './Home'
 import Genres from './Genres'
 import Genre from './Genre'
 import Shows from './Shows'
+import AddNewShow from './AddNewShow'
 
 export default function App() {
 
@@ -16,7 +17,16 @@ export default function App() {
       .then(data => setGenresData(data))
   },[])
 
-  //console.log("in App genresData", genresData)
+  const handleGenresDataUpdate = (editedGenre) => {
+    setGenresData(editedGenre)
+  }
+  
+const handleDeletedShow = (deletedShow) => {
+  const IndexOfShowToDelete = genresData.map(genre => console.log(genre.id))
+  console.log("does it work?", IndexOfShowToDelete)
+  // const copyOfGenresData = [...genresData]
+  // copyOfGenresData.splice(IndexOfShowToDelete, 1)
+}
 
   return (
    <>
@@ -24,10 +34,13 @@ export default function App() {
       <Route path="/" element={<Home />} />
     </Routes>
     <Routes>
+      <Route path="/newShow" element={<AddNewShow />} />
+    </Routes>
+    <Routes>
         <Route path='/genres'/>
           <Route index element={<Genres genresData={genresData} />} />
           <Route path=':id' element={<Genre />}/>
-        <Route path='genres/:id/shows' element={<Shows genresData={genresData} />} />
+        <Route path='genres/:id/shows' element={<Shows genresData={genresData} handleGenresDataUpdate={handleGenresDataUpdate} handleDeletedShow={handleDeletedShow} />} />
     </Routes>
    </>
   )

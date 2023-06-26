@@ -1,8 +1,15 @@
 import React from 'react'
 
-export default function ReadOnlyShowRow({show, handleEditClick}) {
+export default function ReadOnlyShowRow({show, handleEditClick, handleDeletedShow}) {
 
-    //console.log("in readonly", show)
+    function handleDeleteClick() {
+        fetch(`http://localhost:9292/shows/${show.id}`, {
+          method: "DELETE", 
+        })
+        .then((res) => res.json())
+        .then(() => handleDeletedShow(show))
+        }
+    
 
   return (
    <>
@@ -13,7 +20,7 @@ export default function ReadOnlyShowRow({show, handleEditClick}) {
         <td>{show.language}</td>
         <td>
             <button type="button"onClick={(e) => handleEditClick(e, show)}>EDIT</button>
-            <button type="button">DELETE</button>
+            <button type="button" onClick={handleDeleteClick}>DELETE</button>
         </td>
     </tr>
    </>
