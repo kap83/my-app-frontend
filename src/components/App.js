@@ -21,6 +21,11 @@ export default function App() {
     setGenresData(editedGenre)
   }
   
+  const handleDeletedGenre = (deletedGenre) => {
+  console.log(deletedGenre)
+}
+
+
 const handleDeletedShow = (deletedShow) => {
   const IndexOfShowToDelete = genresData.map(genre => console.log(genre.id))
   console.log("does it work?", IndexOfShowToDelete)
@@ -39,7 +44,7 @@ const handleDeletedShow = (deletedShow) => {
     <Routes>
         <Route path='/genres'/>
           <Route index element={<Genres genresData={genresData} />} />
-          <Route path=':id' element={<Genre />}/>
+          <Route path=':id' element={<Genre handleDeletedGenre={handleDeletedGenre}/>}/>
         <Route path='genres/:id/shows' element={<Shows genresData={genresData} handleGenresDataUpdate={handleGenresDataUpdate} handleDeletedShow={handleDeletedShow} />} />
     </Routes>
    </>

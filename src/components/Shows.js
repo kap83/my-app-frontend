@@ -35,6 +35,7 @@ const handleEditClick = (e, show) => {
   setEditedShowId(show.id)
 
   const formValues = {
+    //taking out the id causes an undefined 
       id: show.id,
       title: show.title,
       seasons: show.seasons,
@@ -42,12 +43,11 @@ const handleEditClick = (e, show) => {
       language: show.language, 
       genre_id: show.genre_id
   }
+
   setEditableShowData(formValues)
 }
 
-const handleCancelClick = () => {
-  setEditedShowId(null)
-}
+console.log("editableShow", editableShowData)
 
 const handleEditFormChange = (e) => {
   e.preventDefault()
@@ -55,12 +55,22 @@ const handleEditFormChange = (e) => {
 
 }
 
+const handleCancelClick = () => {
+  setEditedShowId(null)
+}
+
+
 const handleEditShowSubmit = (e) => {
   e.preventDefault()
 
   console.log("wtf", editableShowData.genre_id)
+
+  console.log("the fetch", fetch(`${editableShowData.genre_id}/shows/${editableShowData.id}`))
+  console.log("parsed", parseId)
  
-  fetch(`${editableShowData.genre_id}/shows/${editableShowData.id}`, {
+
+  //THIS WORKS
+  fetch(`http://localhost:9292/genres/${editableShowData.genre_id}/shows/${editableShowData.id}`, {
     method: "PATCH",
     headers: {
       "Accept": "application/json",
