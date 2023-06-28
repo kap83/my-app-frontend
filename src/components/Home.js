@@ -3,7 +3,7 @@ import React from 'react'
 export default function Home() {
   return (
     <div>
-        <h1>TV Show Catalogue</h1>
+        <h2>Click on the Links to navigate the site</h2>
     </div>
   )
 }

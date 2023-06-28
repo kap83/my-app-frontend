@@ -1,8 +1,9 @@
 import React from 'react'
 import Genre from './Genre'
+import AddNewGenre from './AddNewGenre'
 
 
-export default function Genres({genresData}) {
+export default function Genres({genresData, handleNewGenre}) {
 
   //console.log("in Genres genreData", genresData)
 
@@ -18,6 +19,9 @@ export default function Genres({genresData}) {
       />
     ))
    }
+  <AddNewGenre 
+    handleNewGenre={handleNewGenre}
+    />
    </>
   )
 }

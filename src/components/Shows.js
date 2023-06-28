@@ -3,8 +3,9 @@ import React, {useState, useEffect, Fragment} from 'react'
 import {useParams} from 'react-router-dom'
 import ReadOnlyShowRow from './ReadOnlyShowRow'
 import EditableShowRow from './EditableShowRow'
+import AddNewShow from './AddNewShow'
 
-export default function Shows({genresData, handleDeletedShow, handleGenresDataUpdate}) {
+export default function Shows({genresData, handleDeletedShow, handleNewShow}) {
 // const params = useParams()
 const {id} = useParams()
 const parseId = parseInt(id)
@@ -31,7 +32,6 @@ const [editableShowData, setEditableShowData] = useState({
 
 const handleEditClick = (e, show) => {
   e.preventDefault()
-  console.log("in shows", show)
   setEditedShowId(show.id)
 
   const formValues = {
@@ -47,7 +47,6 @@ const handleEditClick = (e, show) => {
   setEditableShowData(formValues)
 }
 
-console.log("editableShow", editableShowData)
 
 const handleEditFormChange = (e) => {
   e.preventDefault()
@@ -63,13 +62,7 @@ const handleCancelClick = () => {
 const handleEditShowSubmit = (e) => {
   e.preventDefault()
 
-  console.log("wtf", editableShowData.genre_id)
-
-  console.log("the fetch", fetch(`${editableShowData.genre_id}/shows/${editableShowData.id}`))
-  console.log("parsed", parseId)
  
-
-  //THIS WORKS
   fetch(`http://localhost:9292/genres/${editableShowData.genre_id}/shows/${editableShowData.id}`, {
     method: "PATCH",
     headers: {
@@ -79,16 +72,27 @@ const handleEditShowSubmit = (e) => {
     body: JSON.stringify(editableShowData)
   })
   .then(res => res.json())
-  .then(editedShowData => {
+  .then(updatedShow => {
 
-    const indexOfShowToEdit = genresData.findIndex(genre => genre.id === editedShowData.id)
-    const copyOfGenresData = [...genresData]
-    copyOfGenresData[indexOfShowToEdit] = editableShowData
-    //handleGenresDataUpdate(copyOfGenresData)
+    const updatedGenresData = genresData.map(genre => {
+      if (genre.id === updatedShow.genre_id) {
+        const updatedShows = genre.shows.filter(show => show.id !== updatedShow.id);
+        updatedShows.push(updatedShow);
+    
+        return {
+          ...genre,
+          shows: updatedShows,
+        };
+      }
+    
+      return genre;
+    });
+    handleNewShow(updatedGenresData)
   })
+  setEditedShowId(null)
+  setEditableShowData("")
+  
 }
-
-
 
 
   return (
@@ -125,11 +129,11 @@ const handleEditShowSubmit = (e) => {
        </Fragment>
         )) 
         } 
+    
       </tbody>
     </table>
     </form>
-
-
+    <AddNewShow />
     </>
   )
 }

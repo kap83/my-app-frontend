@@ -6,8 +6,7 @@ export default function ReadOnlyShowRow({show, handleEditClick, handleDeletedSho
         fetch(`http://localhost:9292/shows/${show.id}`, {
           method: "DELETE", 
         })
-        .then((res) => res.json())
-        .then(() => handleDeletedShow(show))
+        .then(handleDeletedShow(show))
         }
     
 
@@ -23,6 +22,7 @@ export default function ReadOnlyShowRow({show, handleEditClick, handleDeletedSho
             <button type="button" onClick={handleDeleteClick}>DELETE</button>
         </td>
     </tr>
+    
    </>
   )
 }
