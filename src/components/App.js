@@ -7,9 +7,7 @@ import Shows from './Shows'
 
 export default function App() {
 
- 
   const [genresData, setGenresData] = useState([])
-
 
   useEffect(() => {
       fetch('http://localhost:9292/genres')
@@ -25,8 +23,6 @@ export default function App() {
   const handleNewShow = (newShowData) => {
       setGenresData(newShowData)
       
-
-      // setGenresData([...genresData, newShow])
   }
   
   const handleShowEditUpdate = (editedShow) => {
@@ -35,10 +31,20 @@ export default function App() {
 
 
 const handleDeletedShow = (deletedShow) => {
-  const IndexOfShowToDelete = genresData.findIndex(genre => genre.id === deletedShow)
-  const copyOfGenresData = [...genresData]
-  copyOfGenresData.splice(IndexOfShowToDelete, 1)
-  setGenresData(copyOfGenresData)
+  console.log("deletedShow", deletedShow)
+  const updatedGenresData = genresData.map(genre => {
+    if(genre.id === deletedShow.genre_id) {
+      const updatedShows = genre.shows.filter(show => show.id !== deletedShow.id)
+      console.log("updatedShow", updatedShows)
+      debugger
+      return {
+        ...genre,
+        shows: updatedShows
+      }
+    }
+    return genre
+  })
+  setGenresData(updatedGenresData)
 }
 
   return (
@@ -53,9 +59,21 @@ const handleDeletedShow = (deletedShow) => {
     </nav>
   <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/genres' element={<Genres genresData={genresData} handleNewGenre={handleNewGenre} />} />
+      <Route path='/genres' 
+        element={
+        <Genres 
+        genresData={genresData} 
+        handleNewGenre={handleNewGenre} />} 
+        />
       <Route path='/genres/:id' element={<Genre />} />
-      <Route path='/genres/:id/shows' element={<Shows genresData={genresData} handleShowEditUpdate={handleShowEditUpdate} handleNewShow={handleNewShow} handleDeletedShow={handleDeletedShow} />} />  
+      <Route path='/genres/:id/shows' 
+        element={
+        <Shows 
+          genresData={genresData} 
+          handleShowEditUpdate={handleShowEditUpdate} 
+          handleNewShow={handleNewShow} 
+          handleDeletedShow={handleDeletedShow} 
+          />} />  
   </Routes>
    </>
   )

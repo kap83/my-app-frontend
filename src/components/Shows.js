@@ -97,7 +97,7 @@ const handleEditShowSubmit = (e) => {
 
   return (
     <>
-    <h2>{genre.name}</h2>
+    <h2>{genre?.name}</h2>
     <form onSubmit={handleEditShowSubmit}>
     <table>
       <thead>
@@ -116,15 +116,15 @@ const handleEditShowSubmit = (e) => {
         {
           editedShowId === show.id ? 
           <EditableShowRow 
-          editableShowData={editableShowData}
-          handleCancelClick={handleCancelClick}
-          handleEditFormChange={handleEditFormChange}
-          /> 
-          : <ReadOnlyShowRow 
-          handleEditClick={handleEditClick}
-          show={show}
-          handleDeletedShow={handleDeletedShow}
-        />
+            editableShowData={editableShowData}
+            handleCancelClick={handleCancelClick}
+            handleEditFormChange={handleEditFormChange}
+            /> :
+          <ReadOnlyShowRow 
+              handleEditClick={handleEditClick}
+              show={show}
+              handleDeletedShow={handleDeletedShow}
+          />
         }
        </Fragment>
         )) 

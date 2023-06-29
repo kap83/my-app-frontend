@@ -5,7 +5,6 @@ export default function AddNewShow({genresData, handleNewShow}) {
 
   const {id} = useParams()
 
-  
 
   const [addNewShowData, setAddNewShowData] = useState({
     title: "",
