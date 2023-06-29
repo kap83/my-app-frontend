@@ -5,8 +5,8 @@ import ReadOnlyShowRow from './ReadOnlyShowRow'
 import EditableShowRow from './EditableShowRow'
 import AddNewShow from './AddNewShow'
 
-export default function Shows({genresData, handleDeletedShow, handleNewShow}) {
-// const params = useParams()
+export default function Shows({genresData, handleShowEditUpdate, handleDeletedShow, handleNewShow}) {
+
 const {id} = useParams()
 const parseId = parseInt(id)
 
@@ -43,7 +43,6 @@ const handleEditClick = (e, show) => {
       language: show.language, 
       genre_id: show.genre_id
   }
-
   setEditableShowData(formValues)
 }
 
@@ -76,18 +75,19 @@ const handleEditShowSubmit = (e) => {
 
     const updatedGenresData = genresData.map(genre => {
       if (genre.id === updatedShow.genre_id) {
-        const updatedShows = genre.shows.filter(show => show.id !== updatedShow.id);
-        updatedShows.push(updatedShow);
+        const updatedShows = genre.shows.filter(show => show.id !== updatedShow.id)
+        updatedShows.push(updatedShow)
     
         return {
           ...genre,
           shows: updatedShows,
-        };
+        }
       }
     
-      return genre;
-    });
-    handleNewShow(updatedGenresData)
+      return genre
+    })
+    handleShowEditUpdate(updatedGenresData)
+
   })
   setEditedShowId(null)
   setEditableShowData("")
@@ -133,7 +133,7 @@ const handleEditShowSubmit = (e) => {
       </tbody>
     </table>
     </form>
-    <AddNewShow />
+    <AddNewShow genresData={genresData} handleNewShow={handleNewShow} />
     </>
   )
 }

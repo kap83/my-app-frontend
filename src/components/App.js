@@ -18,12 +18,19 @@ export default function App() {
   },[])
 
   const handleNewGenre = (newGenre) => {
-      setGenresData([...genresData, newGenre])
+      setGenresData(prevGenresData => [...prevGenresData, newGenre])
     
   }
+
+  const handleNewShow = (newShowData) => {
+      setGenresData(newShowData)
+      
+
+      // setGenresData([...genresData, newShow])
+  }
   
-  const handleNewShow = (newShow) => {
-    setGenresData(newShow)
+  const handleShowEditUpdate = (editedShow) => {
+    setGenresData(editedShow)
   }
 
 
@@ -48,22 +55,8 @@ const handleDeletedShow = (deletedShow) => {
       <Route path='/' element={<Home />} />
       <Route path='/genres' element={<Genres genresData={genresData} handleNewGenre={handleNewGenre} />} />
       <Route path='/genres/:id' element={<Genre />} />
-      <Route path='/genres/:id/shows' element={<Shows genresData={genresData} handleNewShow={handleNewShow} handleDeletedShow={handleDeletedShow} />} />  
+      <Route path='/genres/:id/shows' element={<Shows genresData={genresData} handleShowEditUpdate={handleShowEditUpdate} handleNewShow={handleNewShow} handleDeletedShow={handleDeletedShow} />} />  
   </Routes>
-
-    {/* <Routes >
-      <Route path="/" element={<Home />} />
-    </Routes>
-    <Routes>
-      <Route path="/addnewshow" element={<AddNewShow />} />
-    </Routes>
-    <Routes>
-        <Route path='/genres'/>
-          <Route index element={<Genres genresData={genresData} />} />
-          <Route path=':id' element={<Genre handleDeletedGenre={handleDeletedGenre}/>}/>
-          <Route path='/genres/:id/shows' element={<Shows genresData={genresData} handleGenresDataUpdate={handleGenresDataUpdate} handleDeletedShow={handleDeletedShow} />} />
-          
-    </Routes> */}
    </>
   )
 }
