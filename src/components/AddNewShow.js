@@ -25,7 +25,6 @@ export default function AddNewShow({genresData, handleNewShow}) {
 const handleSubmit = (e) => {
   e.preventDefault()
 
-
   fetch(`http://localhost:9292/genres/${addNewShowData.genre_id}/shows`, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
@@ -49,6 +48,15 @@ const handleSubmit = (e) => {
     })
     
     handleNewShow(updatedGenresData)
+ 
+    setAddNewShowData({
+      title: "",
+      seasons: "",
+      episodes: "",
+      language: "",
+      genre_id: id
+    })
+
   })
 }
 
@@ -73,6 +81,7 @@ const handleSubmit = (e) => {
                 <input 
                   type='text'
                   name="title"
+                  value={addNewShowData.title}
                   required='required'
                   onChange={handleFormChange}
                 />
@@ -81,6 +90,7 @@ const handleSubmit = (e) => {
                 <input 
                   type='text'
                   name="seasons"
+                  value={addNewShowData.seasons}
                   required='required'
                   onChange={handleFormChange}
                 />
@@ -89,6 +99,7 @@ const handleSubmit = (e) => {
                 <input 
                   type='text'
                   name="episodes"
+                  value={addNewShowData.episodes}
                   required='required'
                   onChange={handleFormChange}
                 />
@@ -97,6 +108,7 @@ const handleSubmit = (e) => {
                 <input 
                   type='text'
                   name="language"
+                  value={addNewShowData.language}
                   required='required'
                   onChange={handleFormChange}
                 />

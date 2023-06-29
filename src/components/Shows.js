@@ -111,7 +111,7 @@ const handleEditShowSubmit = (e) => {
       </thead>
       <tbody>
         { 
-        genre.shows.map(show => (
+        genre?.shows.map(show => (
        <Fragment key={show.id}>
         {
           editedShowId === show.id ? 

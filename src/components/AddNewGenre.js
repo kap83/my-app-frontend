@@ -7,9 +7,7 @@ export default function AddNewGenre({handleNewGenre}) {
 //create handleSubmit (e) --> includes the fetch data and put newGenre in json.stringify
 //pass response data up to apps to setState
 
-  const [newGenre, setNewGenre] = useState({
-    name: " "
-  })
+  const [newGenre, setNewGenre] = useState("")
 
 const handleSubmit = (e) => {
   e.preventDefault()
@@ -25,8 +23,8 @@ const handleSubmit = (e) => {
   })
   .then(res=> res.json())
   .then(updatedGenresData => handleNewGenre(updatedGenresData))
-
   setNewGenre("")
+  console.log(newGenre)
 }
     
   return (
