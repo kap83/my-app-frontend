@@ -5,11 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background: linear-gradient(
+  background: linear-gradient(
     90deg,
     rgba(48, 16, 255, 1) 0%,
     rgba(100, 115, 255, 1) 100%
-  ); */
+  );
 }
 
 code {
@@ -21,7 +21,7 @@ code {
   box-sizing: border-box;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
-}
+}  */
 
 .app-container { 
   display: flex;
@@ -40,6 +40,14 @@ code {
     padding-top: 50px;
     margin-top: -50px;
     margin-bottom: 10px;
+  }
+
+  navBar {
+    display: flex;
+    gap: 1%;
+    padding-left: 47%;
+    color: white;
+    text-decoration-line: underline overline;
   }
 
 
@@ -62,7 +70,7 @@ td {
   padding: 15px;
   font-size: 20px;
 }
- */
+ 
 
 
 

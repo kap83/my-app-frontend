@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import { Link, Route, Routes} from 'react-router-dom'
+import { Route, Routes} from 'react-router-dom'
 import Home from './Home'
 import Genres from './Genres'
 import Genre from './Genre'
 import Shows from './Shows'
+import NavBar from './NavBar'
+import '../index.css'
 
 export default function App() {
 
@@ -49,16 +51,14 @@ const handleDeletedShow = (deletedShow) => {
 
   return (
    <>
-    
+   <div className='app-container'>
    <h1>TV Show Catalogue</h1>
-   <nav>
-      <ul>
-        <li><Link to='/'>HOME</Link> </li>
-        <li><Link to='/genres'>GENRES</Link></li>
-      </ul>
-    </nav>
+  
   <Routes>
       <Route path='/' element={<Home />} />
+  </Routes>
+  <NavBar />
+  <Routes>
       <Route path='/genres' 
         element={
         <Genres 
@@ -75,6 +75,7 @@ const handleDeletedShow = (deletedShow) => {
           handleDeletedShow={handleDeletedShow} 
           />} />  
   </Routes>
+  </div> 
    </>
   )
 }
