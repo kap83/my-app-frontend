@@ -53,12 +53,9 @@ const handleDeletedShow = (deletedShow) => {
    <>
    <div className='app-container'>
    <h1>TV Show Catalogue</h1>
-  
+   <NavBar />
   <Routes>
       <Route path='/' element={<Home />} />
-  </Routes>
-  <NavBar />
-  <Routes>
       <Route path='/genres' 
         element={
         <Genres 

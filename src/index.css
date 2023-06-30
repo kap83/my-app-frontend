@@ -17,11 +17,10 @@ code {
     monospace;
 }
 
-/* * {
-  box-sizing: border-box;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-    'Lucida Sans', Arial, sans-serif;
-}  */
+*{
+  color: white
+}
+
 
 .app-container { 
   display: flex;
@@ -34,7 +33,7 @@ code {
   margin: 128px auto; 
 }
 
-  h1 {
+h1 {
     color: white;
     padding-right: 50px;
     padding-top: 50px;
@@ -42,17 +41,15 @@ code {
     margin-bottom: 10px;
   }
 
-  navBar {
+.navBar {
     display: flex;
     gap: 1%;
     padding-left: 47%;
-    color: white;
-    text-decoration-line: underline overline;
   }
-
 
 table {
   border-collapse: collapse;
+  color: white;
   width: 70%;
   height: 20%;
   margin-left: auto;

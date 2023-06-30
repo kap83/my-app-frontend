@@ -4,21 +4,18 @@ import '../index.css'
 
 
 export default function NavBar() {
-
-    // eslint-disable-next-line
-    // const LinkStyles = {
-    //     color: "white",
-    //     textDecorationLine: "underline overline",
-    // }
-
   
 
   return (
   <div className='navBar'>
-    <NavLink to="/" >HOME</NavLink>
+    <NavLink to="/" style={({isActive}) => ({
+      textDecoration: isActive ? 'underline' : 'none' 
+    })}>HOME</NavLink>
     <br></br>   
     <br></br>
-    <NavLink to='/genres'>GENRES</NavLink>
+    <NavLink to='/genres' style={({isActive}) => ({
+      textDecoration: isActive ? 'underline' : 'none' 
+    })} >GENRES</NavLink>
   </div>
   )
 }
