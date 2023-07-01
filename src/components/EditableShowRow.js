@@ -10,6 +10,7 @@ export default function EditableShowRow({editableShowData, handleEditFormChange,
             type='text'
             defaultValue={editableShowData.title}
             name="title"
+            className='inputStyle'
             required='required'
             placeholder='Title'
             onChange={handleEditFormChange}
@@ -19,7 +20,8 @@ export default function EditableShowRow({editableShowData, handleEditFormChange,
         <input 
           type='text' 
           defaultValue={editableShowData.seasons}
-          name='seasons' 
+          name='seasons'
+          className='inputStyle' 
           required='required' 
           placeholder='seasons'  
           onChange={handleEditFormChange}
@@ -30,6 +32,7 @@ export default function EditableShowRow({editableShowData, handleEditFormChange,
           type='text' 
           defaultValue={editableShowData.episodes}
           name='episodes' 
+          className='inputStyle'
           required='required' 
           placeholder='Episodes'
           onChange={handleEditFormChange}
@@ -40,6 +43,7 @@ export default function EditableShowRow({editableShowData, handleEditFormChange,
         type='text' 
         defaultValue={editableShowData.language}
         name='language' 
+        className='inputStyle'
         required='required' 
         placeholder='Language'
         onChange={handleEditFormChange}

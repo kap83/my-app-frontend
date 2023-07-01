@@ -36,6 +36,7 @@ const handleSubmit = (e) => {
             type='text'
             value={newGenre}
             placeholder='enter here'
+            className='inputStyle'
             onChange={(e) => setNewGenre(e.target.value)}
         />
         <button className='btnStyle2' type='submit'>ADD</button>

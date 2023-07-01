@@ -80,6 +80,7 @@ const handleSubmit = (e) => {
                   type='text'
                   name="title"
                   value={addNewShowData.title}
+                  className='inputStyle'
                   required='required'
                   onChange={handleFormChange}
                 />
@@ -88,6 +89,7 @@ const handleSubmit = (e) => {
                 <input 
                   type='text'
                   name="seasons"
+                  className='inputStyle'
                   value={addNewShowData.seasons}
                   required='required'
                   onChange={handleFormChange}
@@ -97,6 +99,7 @@ const handleSubmit = (e) => {
                 <input 
                   type='text'
                   name="episodes"
+                  className='inputStyle'
                   value={addNewShowData.episodes}
                   required='required'
                   onChange={handleFormChange}
@@ -106,6 +109,7 @@ const handleSubmit = (e) => {
                 <input 
                   type='text'
                   name="language"
+                  className='inputStyle'
                   value={addNewShowData.language}
                   required='required'
                   onChange={handleFormChange}
