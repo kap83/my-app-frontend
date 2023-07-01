@@ -5,7 +5,6 @@ import AddNewGenre from './AddNewGenre'
 
 export default function Genres({genresData, handleNewGenre}) {
 
-  //console.log("in Genres genreData", genresData)
 
   return (
    <>

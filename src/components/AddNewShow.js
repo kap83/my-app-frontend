@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import '../index.css'
 
 export default function AddNewShow({genresData, handleNewShow}) {
 
   const {id} = useParams()
-
 
   const [addNewShowData, setAddNewShowData] = useState({
     title: "",
@@ -20,7 +20,6 @@ export default function AddNewShow({genresData, handleNewShow}) {
     setAddNewShowData((shows => ({...shows, [e.target.name]: e.target.value})))
 
 }
-
 
 const handleSubmit = (e) => {
   e.preventDefault()
@@ -60,10 +59,9 @@ const handleSubmit = (e) => {
   })
 }
 
-
   return (
     <>
-      <h3>Add a New Show</h3>
+      <h2>Add a New Show</h2>
       <form onSubmit={handleSubmit}>
         <table>
           <thead>
@@ -114,7 +112,7 @@ const handleSubmit = (e) => {
                 />
               </td>
               <td>
-                <button type='submit'>ADD</button>
+                <button type='submit' className='btnStyle2'>ADD</button>
               </td>
             </tr>
           </tbody>

@@ -1,4 +1,5 @@
 import React from 'react'
+import '../index.css'
 
 export default function EditableShowRow({editableShowData, handleEditFormChange, handleCancelClick}) {
   return (
@@ -45,8 +46,8 @@ export default function EditableShowRow({editableShowData, handleEditFormChange,
       />
       </td>
       <td>
-        <button type='submit'>SAVE</button>
-        <button type='button' onClick={handleCancelClick}>CANCEL</button>
+        <button type='submit' className='btnStyle1'>SAVE</button>
+        <button type='button' className='btnStyle1' onClick={handleCancelClick}>CANCEL</button>
       </td>
       </tr>
     </>

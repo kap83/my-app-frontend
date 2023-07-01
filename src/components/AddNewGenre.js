@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import '../index.css'
 
 export default function AddNewGenre({handleNewGenre}) {
 
@@ -29,7 +30,7 @@ const handleSubmit = (e) => {
     
   return (
     <>
-    <h3>Add A New Genre</h3>
+    <h2>Add A New Genre</h2>
       <form onSubmit={handleSubmit}>
         <input 
             type='text'
@@ -37,7 +38,7 @@ const handleSubmit = (e) => {
             placeholder='enter here'
             onChange={(e) => setNewGenre(e.target.value)}
         />
-        <button type='submit'>ADD</button>
+        <button className='btnStyle2' type='submit'>ADD</button>
       </form>
     </>
   )

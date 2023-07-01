@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom'
 import ReadOnlyShowRow from './ReadOnlyShowRow'
 import EditableShowRow from './EditableShowRow'
 import AddNewShow from './AddNewShow'
+import NotFoundMessage from './NotFoundMessage'
 
 export default function Shows({genresData, handleShowEditUpdate, handleDeletedShow, handleNewShow}) {
 
@@ -90,17 +91,17 @@ const handleEditShowSubmit = (e) => {
 
   })
   setEditedShowId(null)
-  setEditableShowData("")
-  
+  setEditableShowData("") 
 }
-
 
   return (
     <>
     <h2>{genre?.name}</h2>
+   {
+    genre.shows.length > 0 ? 
     <form onSubmit={handleEditShowSubmit}>
     <table>
-      <thead>
+       <thead>
         <tr>
           <th>TITLE</th>
           <th>SEASONS</th>
@@ -110,9 +111,9 @@ const handleEditShowSubmit = (e) => {
         </tr>
       </thead>
       <tbody>
-        { 
+        {
         genre?.shows.map(show => (
-       <Fragment key={show.id}>
+       <Fragment key={show.id}>      
         {
           editedShowId === show.id ? 
           <EditableShowRow 
@@ -129,10 +130,12 @@ const handleEditShowSubmit = (e) => {
        </Fragment>
         )) 
         } 
-    
       </tbody>
     </table>
-    </form>
+    </form> 
+    : <NotFoundMessage />
+    
+   }
     <AddNewShow genresData={genresData} handleNewShow={handleNewShow} />
     </>
   )

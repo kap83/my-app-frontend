@@ -1,4 +1,5 @@
 import React from 'react'
+import '../index.css'
 
 export default function ReadOnlyShowRow({show, handleEditClick, handleDeletedShow}) {
 
@@ -18,8 +19,8 @@ export default function ReadOnlyShowRow({show, handleEditClick, handleDeletedSho
         <td>{show.episodes}</td>
         <td>{show.language}</td>
         <td>
-            <button type="button"onClick={(e) => handleEditClick(e, show)}>EDIT</button>
-            <button type="button" onClick={handleDeleteClick}>DELETE</button>
+            <button type="button" className='btnStyle1' onClick={(e) => handleEditClick(e, show)}>EDIT</button>
+            <button type="button" className='btnStyle1' onClick={handleDeleteClick}>DELETE</button>
         </td>
     </tr>
     
