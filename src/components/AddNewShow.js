@@ -32,7 +32,7 @@ const handleSubmit = (e) => {
   .then(res => res.json())
   .then(newShow => {
 
-    // eslint-disable-next-line
+   
     const updatedGenresData = genresData.map(genre=> {
       if(genre.id === newShow.genre_id) {
         const updatedShows = Object.values(genre.shows).filter(show => show.id !== newShow.id)

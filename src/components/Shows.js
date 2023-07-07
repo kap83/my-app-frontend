@@ -36,7 +36,6 @@ const handleEditClick = (e, show) => {
   setEditedShowId(show.id)
 
   const formValues = {
-    //taking out the id causes an undefined 
       id: show.id,
       title: show.title,
       seasons: show.seasons,

@@ -33,12 +33,12 @@ export default function App() {
 
 
 const handleDeletedShow = (deletedShow) => {
-  console.log("deletedShow", deletedShow)
+  //console.log("deletedShow", deletedShow)
   const updatedGenresData = genresData.map(genre => {
     if(genre.id === deletedShow.genre_id) {
       const updatedShows = genre.shows.filter(show => show.id !== deletedShow.id)
-      console.log("updatedShow", updatedShows)
-      debugger
+      //console.log("updatedShow", updatedShows)
+      
       return {
         ...genre,
         shows: updatedShows
