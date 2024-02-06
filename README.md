@@ -1,15 +1,17 @@
 # TV Show Catalogue 
 
-A great place to organize your to watch list. Shows are organized by genre for better organization! 
+A place to keep track of your To Be Watched pile. 
 
 ## Functionality
 
-Easy navigation of the website with the navigation bar. 
-Click on a genre category and review all your shows. 
-Add, edit and delete shows easily from within their genre category. 
+This app uses a React frontend and a Ruby/Sinatra/SQLite3 backend
+
+This app includes navbar for easy navigation. 
+TV shows are organized by genre. Just click on a genre to be able to add, edit and delete shows. 
+Pre-filled inputs are included for easier editing. 
 Need a new genre? Just add it! 
 
-The code for the management of data using Ruby and Active Record can be found here: https://github.com/kap83/phase-3-sinatra-react-project
+Backend code can be found here: https://github.com/kap83/phase-3-sinatra-react-project
 
 
 ## Credit
